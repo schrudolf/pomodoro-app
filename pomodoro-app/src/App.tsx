@@ -7,6 +7,7 @@ import Container from "@mui/material/Container";
 import RoundsSlider from "./components/roundsSlider";
 import WorkSlider from "./components/workSlider";
 import BreakSlider from "./components/breakSlider";
+import LongBreakSlider from "./components/longBreakSlider";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <RoundsSlider />
         <WorkSlider />
         <BreakSlider />
+        <LongBreakSlider />
       </Box>
     </Container>
   );
