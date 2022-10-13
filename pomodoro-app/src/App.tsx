@@ -1,24 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
 
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-
-import RoundsSlider from "./components/roundsSlider";
-import WorkSlider from "./components/workSlider";
-import BreakSlider from "./components/breakSlider";
-import LongBreakSlider from "./components/longBreakSlider";
+import Settings from "./components/settings";
 
 function App() {
+  const [isSettingsActive, setSettingStatus] = useState<Boolean>(true);
   return (
-    <Container>
       <Box sx={{ width: "75%", margin: "auto" }}>
-        <RoundsSlider />
-        <WorkSlider />
-        <BreakSlider />
-        <LongBreakSlider />
+        {isSettingsActive ? <Settings setSettingStatus={setSettingStatus}/> : "Settings not active"}
       </Box>
-    </Container>
   );
 }
 
