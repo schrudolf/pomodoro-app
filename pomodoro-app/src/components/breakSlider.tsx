@@ -26,7 +26,7 @@ const BreakSlider = () => {
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        defaultValue={10}
+        defaultValue={5}
         step={5}
         min={5}
         max={30}

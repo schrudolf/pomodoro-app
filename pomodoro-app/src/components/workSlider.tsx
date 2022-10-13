@@ -28,7 +28,7 @@ const WorkSlider = () => {
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        defaultValue={10}
+        defaultValue={25}
         step={5}
         min={5}
         max={120}
