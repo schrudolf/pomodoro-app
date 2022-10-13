@@ -57,7 +57,7 @@
       {
         "fullscreen": false,
         "height": 800,
-        "resizable": true,
+        "resizable": false,
         "title": "MeTime",
         "width": 600
       }

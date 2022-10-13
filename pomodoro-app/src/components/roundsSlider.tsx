@@ -8,13 +8,11 @@ import Box from "@mui/material/Box";
 
 const marks = (function () {
   let getWorkTimers = [];
-  for (let i = 1; i <= 24; i++) {
-    if (i % 5 === 0 || i === 1 || i === 24) {
+  for (let i = 1; i <= 10; i++) {
       getWorkTimers.push({
-        value: i * 5,
-        label: `${0 + i * 5}:00`,
+        value: i,
+        label: i,
       });
-    }
   }
   return getWorkTimers;
 })();
@@ -72,23 +70,22 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
-const WorkSlider = () => {
+const RoundsSlider = () => {
   return (
     <div>
-      <Typography  sx={{margin: "1rem 0 1.5rem -2.5rem", fontWeight: 600, width: "100%"}} gutterBottom>Work time:</Typography>
+      <Typography  sx={{margin: "1rem 0 1.5rem -2.5rem", fontWeight: 600}} gutterBottom>Rounds:</Typography>
       <IOSSlider
         aria-label="ios slider"
-        defaultValue={10}
-        step={5}
-        min={5}
-        max={120}
+        defaultValue={4}
+        step={1}
+        min={1}
+        max={10}
         marks={marks}
         valueLabelDisplay="on"
-        valueLabelFormat={(value) => `${value}:00 minutes`}
       />
       <Box sx={{ m: 3 }} />
     </div>
   );
 };
 
-export default WorkSlider;
+export default RoundsSlider;
