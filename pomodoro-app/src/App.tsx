@@ -1,16 +1,16 @@
 import React, {useState} from "react";
 import "./App.css";
 
-import Box from "@mui/material/Box";
 import Settings from "./components/settings";
+import Pomodoro from "./components/pomodoro";
 
 function App() {
-  const [isSettingsActive, setSettingStatus] = useState<Boolean>(true);
-  return (
-      <Box sx={{ width: "75%", margin: "auto" }}>
-        {isSettingsActive ? <Settings setSettingStatus={setSettingStatus}/> : "Settings not active"}
-      </Box>
-  );
+  const [isSettingsActive, setSettingStatus] = useState<Boolean>(false);
+  if(isSettingsActive){
+    return <Settings setSettingStatus={setSettingStatus} />;
+  } else {
+    return <Pomodoro setSettingStatus={setSettingStatus} />;
+  }
 }
 
 export default App;
