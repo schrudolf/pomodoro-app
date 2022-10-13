@@ -23,13 +23,13 @@ const iOSBoxShadow =
   "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
 
 const IOSSlider = styled(Slider)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#3880ff" : "#3880ff",
+  color: "lightgreen",
   height: 2,
   padding: "15px 0",
   "& .MuiSlider-thumb": {
     height: 28,
     width: 28,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     boxShadow: iOSBoxShadow,
     "&:focus, &:hover, &.Mui-active": {
       boxShadow:
@@ -51,7 +51,8 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
     },
     "& *": {
       background: "transparent",
-      color: theme.palette.mode === "dark" ? "#fff" : "#000",
+      color: "white",
+      fontSize: "1rem",
     },
   },
   "& .MuiSlider-track": {
@@ -59,10 +60,10 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
   },
   "& .MuiSlider-rail": {
     opacity: 0.5,
-    backgroundColor: "#bfbfbf",
+    backgroundColor: "white",
   },
   "& .MuiSlider-mark": {
-    backgroundColor: "#bfbfbf",
+    backgroundColor: "black",
     height: 8,
     width: 1,
     "&.MuiSlider-markActive": {
@@ -75,7 +76,12 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
 const WorkSlider = () => {
   return (
     <div>
-      <Typography  sx={{margin: "1rem 0 1.5rem -2.5rem", fontWeight: 600, width: "100%"}} gutterBottom>Work time:</Typography>
+      <Typography
+        sx={{ margin: "1rem 0 1.5rem -2.5rem", fontWeight: 600, width: "100%" }}
+        gutterBottom
+      >
+        Work time:
+      </Typography>
       <IOSSlider
         aria-label="ios slider"
         defaultValue={10}
