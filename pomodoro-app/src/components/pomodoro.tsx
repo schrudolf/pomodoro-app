@@ -21,6 +21,12 @@ const Pomodoro = (props: { setSettingStatus: (value: Boolean) => void, settings:
       >
         <SettingsIcon sx={{ fontSize: "3rem", color: "white" }} />
       </Link>
+      <div>
+        <p>{props.settings.rounds}</p>
+        <p>{props.settings.workTime}</p>
+        <p>{props.settings.breakTime}</p>
+        <p>{props.settings.longBreakTime}</p>
+      </div>
     </Box>
   );
 };
