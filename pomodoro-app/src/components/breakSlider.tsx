@@ -33,7 +33,7 @@ const BreakSlider = (props: {settings: AppSettings, setSettings: (prevState: any
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        defaultValue={props.settings.breakTime}
+        value={props.settings.breakTime}
         step={5}
         min={5}
         max={30}

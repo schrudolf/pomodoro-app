@@ -19,6 +19,8 @@ const Pomodoro = (props: {
   settings: AppSettings;
 }) => {
   const [pomodoroStatus, setPomodoroStatus] = useState(0);
+  const getRealTime = (props.settings.workTime * 100).toString();
+  const modifiedTime = getRealTime.slice(0, getRealTime.length -2) + ":" + getRealTime.slice(getRealTime.length -2)
   const getHandlerButton = (status: number) => {
     if (status === 0) {
       return (
@@ -76,7 +78,7 @@ const Pomodoro = (props: {
       </Box>
       <Box textAlign={"center"} my={3}>
         <Typography variant="h2" color="text.secondary">
-          {`25:00`}
+          {modifiedTime}
         </Typography>
         <Grid textAlign={"center"} container sx={{ color: "text.primary" }}>
           <Grid textAlign={"right"} item xs={4}>

@@ -33,7 +33,7 @@ const RoundsSlider = (props: { settings: AppSettings, setSettings: (prevState: a
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        defaultValue={props.settings.rounds}
+        value={props.settings.rounds}
         step={1}
         min={1}
         max={10}

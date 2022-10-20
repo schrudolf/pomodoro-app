@@ -35,7 +35,7 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        defaultValue={props.settings.workTime}
+        value={props.settings.workTime}
         step={5}
         min={5}
         max={120}
