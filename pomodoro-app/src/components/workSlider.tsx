@@ -17,7 +17,13 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const WorkSlider = () => {
+const WorkSlider = (props: { setSettings: (prevState: any) => any }) => {
+  const updateWorkTime = (value: number | number[]) => {
+    props.setSettings((prevState: any) => ({
+      ...prevState,
+      workTime: value,
+    }));
+  };
   return (
     <div>
       <Typography
@@ -35,6 +41,7 @@ const WorkSlider = () => {
         marks={marks}
         valueLabelDisplay="on"
         valueLabelFormat={(value) => `${value} minutes`}
+        onChange={(e, v, t) => updateWorkTime(v)}
       />
       <Box sx={{ m: 3 }} />
     </div>

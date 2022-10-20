@@ -31,7 +31,7 @@ function Settings({ setSettingStatus, setSettings }: settingsProp) {
       </Typography>
       ;
       <RoundsSlider setSettings={setSettings} />
-      <WorkSlider />
+      <WorkSlider setSettings={setSettings} />
       <BreakSlider />
       <LongBreakSlider />
       <Button
