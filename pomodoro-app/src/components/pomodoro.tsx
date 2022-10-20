@@ -7,6 +7,10 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import CircleProgress from "./circleProgress";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+
+import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
+import WeekendIcon from "@mui/icons-material/Weekend";
 
 import { AppSettings } from "../models/settings";
 
@@ -62,22 +66,11 @@ const Pomodoro = (props: {
   const resetPomodoroApp = () => {
     setPomodoroStatus(0);
   };
-  // const pomodoroStatusHandler = () => {
-  //   setPomodoroStatus(!pomodoroStatus);
-  // };
   const openSettings = () => {
     props.setSettingStatus(true);
   };
   return (
     <Container>
-      <Box>
-        {/* <div>
-          <p>{props.settings.rounds}</p>
-          <p>{props.settings.workTime}</p>
-          <p>{props.settings.breakTime}</p>
-          <p>{props.settings.longBreakTime}</p>
-        </div> */}
-      </Box>
       <Box textAlign={"center"} mt={5}>
         <CircleProgress />
       </Box>
@@ -85,6 +78,26 @@ const Pomodoro = (props: {
         <Typography variant="h2" color="text.secondary">
           {`25:00`}
         </Typography>
+        <Grid textAlign={"center"} container sx={{ color: "text.primary" }}>
+          <Grid textAlign={"right"} item xs={4}>
+            <SelfImprovementIcon sx={{ color: "white", marginRight: "4px" }} />
+          </Grid>
+          <Grid item xs={1}>
+            <Typography fontWeight={600}>
+              {props.settings.breakTime + ":00"}
+            </Typography>
+          </Grid>
+          <Grid textAlign={"right"} item xs={2}>
+            <WeekendIcon
+              sx={{ fontSize: "1.5rem", color: "white", marginRight: "4px" }}
+            />
+          </Grid>
+          <Grid textAlign={"left"} item xs={4}>
+            <Typography fontWeight={600}>
+              {props.settings.longBreakTime + ":00"}
+            </Typography>
+          </Grid>
+        </Grid>
       </Box>
       <Box textAlign={"center"}>
         {getHandlerButton(pomodoroStatus)}
