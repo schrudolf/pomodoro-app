@@ -24,7 +24,7 @@ const LongBreakSlider = () => {
         sx={{ margin: "1rem 0 2rem -2.5rem", fontWeight: 600, width: "100%" }}
         gutterBottom
       >
-        Break time:
+        Long break time:
       </Typography>
       <SlideStyle
         aria-label="ios slider"
