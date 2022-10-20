@@ -4,11 +4,9 @@ import "./App.css";
 import Settings from "./components/settings";
 import Pomodoro from "./components/pomodoro";
 
-import { AppSettings } from "./models/settings";
-
 function App() {
   const [isSettingsActive, setSettingStatus] = useState<Boolean>(false);
-  const [settings, setSettings] = useState<AppSettings>({
+  const [settings, setSettings] = useState({
     rounds: 4,
     workTime: 25,
     breakTime: 5,
@@ -16,7 +14,7 @@ function App() {
   });
 
   if (isSettingsActive) {
-    return <Settings setSettingStatus={setSettingStatus} setSettings={setSettings}/>;
+    return <Settings setSettingStatus={setSettingStatus} settings={settings} setSettings={setSettings}/>;
   } else {
     return <Pomodoro setSettingStatus={setSettingStatus} settings={settings}/>;
   }

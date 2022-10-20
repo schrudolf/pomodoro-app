@@ -12,10 +12,11 @@ import { AppSettings } from "../models/settings";
 
 interface settingsProp {
   setSettingStatus: (value: Boolean) => void;
+  settings: AppSettings,
   setSettings: (value: AppSettings) => void;
 }
 
-function Settings({ setSettingStatus, setSettings }: settingsProp) {
+function Settings({ setSettingStatus, settings ,setSettings }: settingsProp) {
   const saveSettings = () => {
     setSettingStatus(false);
   };
@@ -29,11 +30,10 @@ function Settings({ setSettingStatus, setSettings }: settingsProp) {
       >
         Settings
       </Typography>
-      ;
-      <RoundsSlider setSettings={setSettings} />
-      <WorkSlider setSettings={setSettings} />
-      <BreakSlider setSettings={setSettings} />
-      <LongBreakSlider setSettings={setSettings} />
+      <RoundsSlider settings={settings} setSettings={setSettings} />
+      <WorkSlider settings={settings} setSettings={setSettings} />
+      <BreakSlider settings={settings} setSettings={setSettings} />
+      <LongBreakSlider settings={settings} setSettings={setSettings} />
       <Button
         sx={{ width: "100%", fontWeight: 600 }}
         onClick={saveSettings}

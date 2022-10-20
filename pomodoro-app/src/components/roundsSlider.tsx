@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import SlideStyle from "./slidesStyle";
+import { AppSettings } from "../models/settings";
 
 const marks = (function () {
   let getWorkTimers = [];
@@ -15,7 +16,7 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const RoundsSlider = (props: { setSettings: (prevState: any) => any }) => {
+const RoundsSlider = (props: { settings: AppSettings, setSettings: (prevState: any) => any }) => {
   const updateRounds = (value: number | number[]) => {
     props.setSettings((prevState: any) => ({
       ...prevState,
@@ -32,7 +33,7 @@ const RoundsSlider = (props: { setSettings: (prevState: any) => any }) => {
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        defaultValue={4}
+        defaultValue={props.settings.rounds}
         step={1}
         min={1}
         max={10}

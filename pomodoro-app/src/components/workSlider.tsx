@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import SlideStyle from "./slidesStyle";
+import { AppSettings } from "../models/settings";
 
 const marks = (function () {
   let getWorkTimers = [];
@@ -17,7 +18,7 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const WorkSlider = (props: { setSettings: (prevState: any) => any }) => {
+const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any) => any }) => {
   const updateWorkTime = (value: number | number[]) => {
     props.setSettings((prevState: any) => ({
       ...prevState,
@@ -34,7 +35,7 @@ const WorkSlider = (props: { setSettings: (prevState: any) => any }) => {
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        defaultValue={25}
+        defaultValue={props.settings.workTime}
         step={5}
         min={5}
         max={120}
