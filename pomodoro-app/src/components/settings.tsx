@@ -32,7 +32,7 @@ function Settings({ setSettingStatus, setSettings }: settingsProp) {
       ;
       <RoundsSlider setSettings={setSettings} />
       <WorkSlider setSettings={setSettings} />
-      <BreakSlider />
+      <BreakSlider setSettings={setSettings} />
       <LongBreakSlider />
       <Button
         sx={{ width: "100%", fontWeight: 600 }}

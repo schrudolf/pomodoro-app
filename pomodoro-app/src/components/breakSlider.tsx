@@ -15,7 +15,13 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const BreakSlider = () => {
+const BreakSlider = (props: { setSettings: (prevState: any) => any }) => {
+  const updateBreakTime = (value: number | number[]) => {
+    props.setSettings((prevState: any) => ({
+      ...prevState,
+      breakTime: value,
+    }));
+  };
   return (
     <div>
       <Typography
@@ -33,6 +39,7 @@ const BreakSlider = () => {
         marks={marks}
         valueLabelDisplay="on"
         valueLabelFormat={(value) => `${value} minutes`}
+        onChange={(e, v, t) => updateBreakTime(v)}
       />
       <Box sx={{ m: 3 }} />
     </div>
