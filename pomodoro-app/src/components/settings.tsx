@@ -8,7 +8,12 @@ import WorkSlider from "./workSlider";
 import BreakSlider from "./breakSlider";
 import LongBreakSlider from "./longBreakSlider";
 
-function Settings(props: { setSettingStatus: (value: Boolean) => void }) {
+interface settingsProp {
+  setSettingStatus: (value: Boolean) => void,
+  setSettings: object
+}
+
+function Settings(props: settingsProp) {
   const saveSettings = () => {
     props.setSettingStatus(false);
   };
