@@ -1,3 +1,4 @@
+import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -14,7 +15,13 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const RoundsSlider = () => {
+const RoundsSlider = (props: { setSettings: (prevState: any) => any }) => {
+  const updateRounds = (value: number | number[]) => {
+    props.setSettings((prevState: any) => ({
+      ...prevState,
+      rounds: value,
+    }));
+  };
   return (
     <div>
       <Typography
@@ -31,6 +38,7 @@ const RoundsSlider = () => {
         max={10}
         marks={marks}
         valueLabelDisplay="on"
+        onChange={(e, v, t) => updateRounds(v)}
       />
       <Box sx={{ m: 3 }} />
     </div>

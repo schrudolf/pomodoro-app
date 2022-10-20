@@ -8,22 +8,29 @@ import WorkSlider from "./workSlider";
 import BreakSlider from "./breakSlider";
 import LongBreakSlider from "./longBreakSlider";
 
+import { AppSettings } from "../models/settings";
+
 interface settingsProp {
-  setSettingStatus: (value: Boolean) => void,
-  setSettings: object
+  setSettingStatus: (value: Boolean) => void;
+  setSettings: (value: AppSettings) => void;
 }
 
-function Settings(props: settingsProp) {
+function Settings({ setSettingStatus, setSettings }: settingsProp) {
   const saveSettings = () => {
-    props.setSettingStatus(false);
+    setSettingStatus(false);
   };
   return (
     <Box sx={{ width: "75%", margin: "auto" }}>
-      <Typography fontWeight={"bold"} textAlign={"center"} variant="h4" component="h2">
+      <Typography
+        fontWeight={"bold"}
+        textAlign={"center"}
+        variant="h4"
+        component="h2"
+      >
         Settings
       </Typography>
       ;
-      <RoundsSlider />
+      <RoundsSlider setSettings={setSettings} />
       <WorkSlider />
       <BreakSlider />
       <LongBreakSlider />

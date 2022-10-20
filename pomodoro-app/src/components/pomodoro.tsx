@@ -4,7 +4,9 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-const Pomodoro = (props: { setSettingStatus: (value: Boolean) => void }) => {
+import { AppSettings } from "../models/settings";
+
+const Pomodoro = (props: { setSettingStatus: (value: Boolean) => void, settings: AppSettings }) => {
   const openSettings = () => {
     props.setSettingStatus(true);
   };

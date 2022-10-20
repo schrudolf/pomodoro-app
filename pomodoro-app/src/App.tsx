@@ -4,12 +4,7 @@ import "./App.css";
 import Settings from "./components/settings";
 import Pomodoro from "./components/pomodoro";
 
-interface AppSettings {
-  rounds: number,
-  workTime: number,
-  breakTime: number,
-  longBreakTime: number,
-}
+import { AppSettings } from "./models/settings";
 
 function App() {
   const [isSettingsActive, setSettingStatus] = useState<Boolean>(false);
@@ -23,7 +18,7 @@ function App() {
   if (isSettingsActive) {
     return <Settings setSettingStatus={setSettingStatus} setSettings={setSettings}/>;
   } else {
-    return <Pomodoro setSettingStatus={setSettingStatus} />;
+    return <Pomodoro setSettingStatus={setSettingStatus} settings={settings}/>;
   }
 }
 
