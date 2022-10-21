@@ -33,6 +33,7 @@ function App() {
               "longBreakTime"
             );
             const statusValue = await localforage.getItem("status");
+            const percentValue = await localforage.getItem("percent");
             setSettings((prevState: any) => ({
               ...prevState,
               breakTime: breakTimeValue,
@@ -40,6 +41,7 @@ function App() {
               rounds: roundsValue,
               workTime: workTimeValue,
               status: statusValue,
+              percent: percentValue
             }));
             setIsAppReady(true);
           } catch (err) {

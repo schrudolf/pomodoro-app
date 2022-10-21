@@ -24,7 +24,7 @@ interface pomodoroProps {
 const Pomodoro = ({
   setSettingStatus,
   settings,
-  setSettings
+  setSettings,
 }: pomodoroProps) => {
   const [pomodoroStatus, setPomodoroStatus] = useState(0);
   const intervalref = useRef<number | null>(null);
@@ -35,18 +35,34 @@ const Pomodoro = ({
     getRealTime.slice(getRealTime.length - 2);
 
   let clockHandler = () => {
-    localforage.getItem("workTime", (err: any, value: string | null) => {
-      if (typeof value === "string") {
-        let parseTime = parseInt(value) - 1;
-        localforage.setItem("workTime", parseTime.toString(), (err) => {
-          if (err) throw err;
-          setSettings((prevState: any) => ({
-            ...prevState,
-            workTime: parseTime.toString(),
-          }));
-        });
+    localforage.getItem(
+      "workTime",
+      (err: any, workTimeValue: string | null) => {
+        if (typeof workTimeValue === "string") {
+          let parseTime = parseInt(workTimeValue) - 1;
+          localforage.setItem("workTime", parseTime.toString(), (err) => {
+            if (err) throw err;
+            localforage.getItem(
+              "selectedWorkTime",
+              (err: any, selectedWorkTime: string | null) => {
+                if (typeof selectedWorkTime === "string") {
+                  let getSelectedTime = parseInt(selectedWorkTime);
+                  let getWorkTime = parseInt(workTimeValue);
+                  let calculateCurrentPercent = Math.round(
+                    100 - (getWorkTime / getSelectedTime) * 100
+                  );
+                  setSettings((prevState: any) => ({
+                    ...prevState,
+                    workTime: parseTime.toString(),
+                    percent: calculateCurrentPercent,
+                  }));
+                }
+              }
+            );
+          });
+        }
       }
-    });
+    );
   };
 
   const getHandlerButton = (status: number) => {
@@ -101,10 +117,10 @@ const Pomodoro = ({
   };
   const resetPomodoroApp = () => {
     setPomodoroStatus(0);
-    localforage.getItem("selectedWorkTime",(err, value) => {
-      if(err) throw err;
+    localforage.getItem("selectedWorkTime", (err, value) => {
+      if (err) throw err;
       localforage.setItem("workTime", value, (err) => {
-        if(err) throw err;
+        if (err) throw err;
         setSettings((prevState: any) => ({
           ...prevState,
           workTime: value,
@@ -113,17 +129,24 @@ const Pomodoro = ({
           window.clearInterval(intervalref.current);
           intervalref.current = null;
         }
-      })
-    })
+      });
+    });
     setPomodoroStatus(0);
   };
   const openSettings = () => {
+    setSettings((prevState: any) => ({
+      ...prevState,
+      percent: 0,
+    }));
+    localforage.setItem("percent", 0, (err) => {
+      if (err) throw err;
+    });
     setSettingStatus(true);
   };
   return (
     <Container>
       <Box textAlign={"center"} mt={5}>
-        <CircleProgress />
+        <CircleProgress settings={settings} />
       </Box>
       <Box textAlign={"center"} my={3}>
         <Typography variant="h2" color="text.secondary">

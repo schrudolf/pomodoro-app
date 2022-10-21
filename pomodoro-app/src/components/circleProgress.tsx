@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -10,6 +9,7 @@ function CircularProgressWithLabel(props: any) {
       <CircularProgress
         color="primary"
         size={300}
+        sx={{boxShadow: "inset 0px 0px 0px 25px black", borderRadius: "100%"}}
         variant="determinate"
         {...props}
       />
@@ -25,7 +25,7 @@ function CircularProgressWithLabel(props: any) {
           justifyContent: "center",
         }}
       >
-        <Typography variant="h5" >
+        <Typography variant="h5">
           Work
           <div>
             <Typography variant="h2" color="text.secondary">
@@ -38,9 +38,9 @@ function CircularProgressWithLabel(props: any) {
   );
 }
 
-const CircleProgress = () => {
-  const [progress, setProgress] = React.useState(100);
-  return <CircularProgressWithLabel value={progress} />;
+const CircleProgress = (props: { settings: any }) => {
+  console.log(props.settings.percent);
+  return <CircularProgressWithLabel value={props.settings.percent} />;
 };
 
 export default CircleProgress;
