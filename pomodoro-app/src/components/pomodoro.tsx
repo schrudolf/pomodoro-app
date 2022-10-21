@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import localforage from "localforage";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -14,13 +15,40 @@ import WeekendIcon from "@mui/icons-material/Weekend";
 
 import { AppSettings } from "../models/settings";
 
-const Pomodoro = (props: {
+interface pomodoroProps {
   setSettingStatus: (value: Boolean) => void;
   settings: AppSettings;
-}) => {
+  setSettings: (value: any) => void;
+}
+
+const Pomodoro = ({
+  setSettingStatus,
+  settings,
+  setSettings
+}: pomodoroProps) => {
   const [pomodoroStatus, setPomodoroStatus] = useState(0);
-  const getRealTime = props.settings.workTime;
-  const modifiedTime = getRealTime.slice(0, getRealTime.length -2) + ":" + getRealTime.slice(getRealTime.length -2)
+  const intervalref = useRef<number | null>(null);
+  const getRealTime = settings.workTime;
+  const modifiedTime =
+    getRealTime.slice(0, getRealTime.length - 2) +
+    ":" +
+    getRealTime.slice(getRealTime.length - 2);
+
+  let clockHandler = () => {
+    localforage.getItem("workTime", (err: any, value: string | null) => {
+      if (typeof value === "string") {
+        let parseTime = parseInt(value) - 1;
+        localforage.setItem("workTime", parseTime.toString(), (err) => {
+          if (err) throw err;
+          setSettings((prevState: any) => ({
+            ...prevState,
+            workTime: parseTime.toString(),
+          }));
+        });
+      }
+    });
+  };
+
   const getHandlerButton = (status: number) => {
     if (status === 0) {
       return (
@@ -58,18 +86,24 @@ const Pomodoro = (props: {
   };
   const startPomodoroApp = () => {
     setPomodoroStatus(1);
+    if (intervalref.current !== null) return;
+    intervalref.current = window.setInterval(clockHandler, 1000);
   };
   const pausePomodoroApp = () => {
     setPomodoroStatus(2);
+    if (intervalref.current) {
+      window.clearInterval(intervalref.current);
+      intervalref.current = null;
+    }
   };
   const continuePomodoroApp = () => {
-    setPomodoroStatus(1);
+    startPomodoroApp();
   };
   const resetPomodoroApp = () => {
     setPomodoroStatus(0);
   };
   const openSettings = () => {
-    props.setSettingStatus(true);
+    setSettingStatus(true);
   };
   return (
     <Container>
@@ -86,7 +120,7 @@ const Pomodoro = (props: {
           </Grid>
           <Grid item xs={1}>
             <Typography fontWeight={600}>
-              {props.settings.breakTime + ":00"}
+              {settings.breakTime + ":00"}
             </Typography>
           </Grid>
           <Grid textAlign={"right"} item xs={2}>
@@ -96,7 +130,7 @@ const Pomodoro = (props: {
           </Grid>
           <Grid textAlign={"left"} item xs={4}>
             <Typography fontWeight={600}>
-              {props.settings.longBreakTime + ":00"}
+              {settings.longBreakTime + ":00"}
             </Typography>
           </Grid>
         </Grid>

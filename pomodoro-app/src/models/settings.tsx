@@ -3,4 +3,5 @@ export interface AppSettings {
   workTime: string;
   breakTime: number;
   longBreakTime: number;
+  status: number;
 }

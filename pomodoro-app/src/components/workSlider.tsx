@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import SlideStyle from "./slidesStyle";
+import localforage from "localforage";
 import { AppSettings } from "../models/settings";
 
 const marks = (function () {
@@ -25,6 +26,9 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
         ...prevState,
         workTime: (value * 100).toString(),
       }));
+      localforage.setItem("workTime", (value * 100).toString(), (err) => {
+        if(err) throw err;
+      })
     }
   };
   return (
