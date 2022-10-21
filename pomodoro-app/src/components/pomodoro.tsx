@@ -124,6 +124,7 @@ const Pomodoro = ({
         setSettings((prevState: any) => ({
           ...prevState,
           workTime: value,
+          percent: 0,
         }));
         if (intervalref.current) {
           window.clearInterval(intervalref.current);
