@@ -20,10 +20,12 @@ const marks = (function () {
 
 const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any) => any }) => {
   const updateWorkTime = (value: number | number[]) => {
-    props.setSettings((prevState: any) => ({
-      ...prevState,
-      workTime: value,
-    }));
+    if(typeof value === "number"){
+      props.setSettings((prevState: any) => ({
+        ...prevState,
+        workTime: (value * 100).toString(),
+      }));
+    }
   };
   return (
     <div>
@@ -35,7 +37,7 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        value={props.settings.workTime}
+        value={parseInt(props.settings.workTime) / 100}
         step={5}
         min={5}
         max={120}

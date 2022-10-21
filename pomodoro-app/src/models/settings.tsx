@@ -1,6 +1,6 @@
 export interface AppSettings {
   rounds: number;
-  workTime: number;
+  workTime: string;
   breakTime: number;
   longBreakTime: number;
 }

@@ -19,7 +19,7 @@ const Pomodoro = (props: {
   settings: AppSettings;
 }) => {
   const [pomodoroStatus, setPomodoroStatus] = useState(0);
-  const getRealTime = (props.settings.workTime * 100).toString();
+  const getRealTime = props.settings.workTime;
   const modifiedTime = getRealTime.slice(0, getRealTime.length -2) + ":" + getRealTime.slice(getRealTime.length -2)
   const getHandlerButton = (status: number) => {
     if (status === 0) {

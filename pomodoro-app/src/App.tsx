@@ -8,7 +8,7 @@ function App() {
   const [isSettingsActive, setSettingStatus] = useState<Boolean>(false);
   const [settings, setSettings] = useState({
     rounds: 4,
-    workTime: 25,
+    workTime: "2500",
     breakTime: 5,
     longBreakTime: 10,
   });
