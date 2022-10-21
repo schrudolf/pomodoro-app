@@ -55,7 +55,7 @@ const Pomodoro = ({
         <Button
           onClick={startPomodoroApp}
           variant="contained"
-          sx={{ width: "30%", margin: "0.3rem", fontWeight: 600 }}
+          sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
         >
           Start
         </Button>
@@ -66,7 +66,7 @@ const Pomodoro = ({
           onClick={pausePomodoroApp}
           variant="contained"
           color="error"
-          sx={{ width: "30%", margin: "0.3rem", fontWeight: 600 }}
+          sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
         >
           Pause
         </Button>
@@ -77,7 +77,7 @@ const Pomodoro = ({
           onClick={continuePomodoroApp}
           variant="contained"
           color="success"
-          sx={{ width: "30%", margin: "0.3rem", fontWeight: 600 }}
+          sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
         >
           Continue
         </Button>
@@ -100,6 +100,21 @@ const Pomodoro = ({
     startPomodoroApp();
   };
   const resetPomodoroApp = () => {
+    setPomodoroStatus(0);
+    localforage.getItem("selectedWorkTime",(err, value) => {
+      if(err) throw err;
+      localforage.setItem("workTime", value, (err) => {
+        if(err) throw err;
+        setSettings((prevState: any) => ({
+          ...prevState,
+          workTime: value,
+        }));
+        if (intervalref.current) {
+          window.clearInterval(intervalref.current);
+          intervalref.current = null;
+        }
+      })
+    })
     setPomodoroStatus(0);
   };
   const openSettings = () => {
@@ -141,9 +156,19 @@ const Pomodoro = ({
           variant="contained"
           color="warning"
           onClick={resetPomodoroApp}
-          sx={{ width: "30%", margin: "0.3rem", fontWeight: 600 }}
+          sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
         >
-          Reset
+          Reset Time
+        </Button>
+      </Box>
+      <Box textAlign={"center"}>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={resetPomodoroApp}
+          sx={{ width: "83%", margin: "0.3rem", fontWeight: 600 }}
+        >
+          Full Reset
         </Button>
       </Box>
       <Box textAlign={"center"}>

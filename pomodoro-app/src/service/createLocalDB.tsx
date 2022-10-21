@@ -1,9 +1,9 @@
 import React from "react";
 import localforage from "localforage";
-import { AppSettings } from "../models/settings";
 
 type Rounds = number;
 type WorkTime = string;
+type SelectedWorkTime = string;
 type BreakTime = number;
 type LongBreakTime = number;
 type Status = number;
@@ -11,6 +11,7 @@ type Status = number;
 const createLocalDB = ():void => {
   const rounds: Rounds = 4;
   const workTime: WorkTime = "2500";
+  const selectedWorkTime: SelectedWorkTime = "2500";
   const breakTime: BreakTime = 5;
   const longBreakTime: LongBreakTime = 10;
   const status: Status = 0;
@@ -18,6 +19,9 @@ const createLocalDB = ():void => {
     if (err) throw err;
   });
   localforage.setItem("workTime", workTime, (err) => {
+    if (err) throw err;
+  });
+  localforage.setItem("selectedWorkTime", selectedWorkTime, (err) => {
     if (err) throw err;
   });
   localforage.setItem("breakTime", breakTime, (err) => {

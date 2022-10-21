@@ -29,6 +29,9 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
       localforage.setItem("workTime", (value * 100).toString(), (err) => {
         if(err) throw err;
       })
+      localforage.setItem("selectedWorkTime", (value * 100).toString(), (err) => {
+        if(err) throw err;
+      })
     }
   };
   return (
