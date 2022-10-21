@@ -28,11 +28,12 @@ const Pomodoro = ({
 }: pomodoroProps) => {
   const [pomodoroStatus, setPomodoroStatus] = useState(0);
   const intervalref = useRef<number | null>(null);
-  const getRealTime = settings.workTime;
-  const modifiedTime =
-    getRealTime.slice(0, getRealTime.length - 2) +
-    ":" +
-    getRealTime.slice(getRealTime.length - 2);
+  const getRealTime = parseInt(settings.workTime);
+  const getSeconds = getRealTime % 60;
+  const getMinutes = Math.floor((getRealTime % 3600) / 60);
+  const modofiedSeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
+  const modifiedMinutes = getMinutes < 10 ? "0" + getMinutes : getMinutes
+  const modifiedTime = modifiedMinutes + ":" + modofiedSeconds
 
   let clockHandler = () => {
     localforage.getItem(

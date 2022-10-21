@@ -24,12 +24,12 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
     if(typeof value === "number"){
       props.setSettings((prevState: any) => ({
         ...prevState,
-        workTime: (value * 100).toString(),
+        workTime: (value * 60).toString(),
       }));
-      localforage.setItem("workTime", (value * 100).toString(), (err) => {
+      localforage.setItem("workTime", (value * 60).toString(), (err) => {
         if(err) throw err;
       })
-      localforage.setItem("selectedWorkTime", (value * 100).toString(), (err) => {
+      localforage.setItem("selectedWorkTime", (value * 60).toString(), (err) => {
         if(err) throw err;
       })
     }
@@ -44,7 +44,7 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        value={parseInt(props.settings.workTime) / 100}
+        value={parseInt(props.settings.workTime) / 60}
         step={5}
         min={5}
         max={120}

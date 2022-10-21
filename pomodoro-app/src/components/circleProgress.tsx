@@ -39,7 +39,6 @@ function CircularProgressWithLabel(props: any) {
 }
 
 const CircleProgress = (props: { settings: any }) => {
-  console.log(props.settings.percent);
   return <CircularProgressWithLabel value={props.settings.percent} />;
 };
 

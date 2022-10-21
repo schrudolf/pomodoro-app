@@ -9,35 +9,21 @@ type LongBreakTime = number;
 type Status = number;
 type Percent = number;
 
-const createLocalDB = ():void => {
+const createLocalDB = async () => {
   const rounds: Rounds = 4;
   const workTime: WorkTime = "2500";
-  const selectedWorkTime: SelectedWorkTime = "2500";
+  const selectedWorkTime: SelectedWorkTime = "1500";
   const breakTime: BreakTime = 5;
   const longBreakTime: LongBreakTime = 10;
   const status: Status = 0;
   const percent: Percent = 0;
-  localforage.setItem("rounds", rounds, (err) => {
-    if (err) throw err;
-  });
-  localforage.setItem("workTime", workTime, (err) => {
-    if (err) throw err;
-  });
-  localforage.setItem("selectedWorkTime", selectedWorkTime, (err) => {
-    if (err) throw err;
-  });
-  localforage.setItem("breakTime", breakTime, (err) => {
-    if (err) throw err;
-  });
-  localforage.setItem("longBreakTime", longBreakTime, (err) => {
-    if (err) throw err;
-  });
-  localforage.setItem("status", status, (err) => {
-    if (err) throw err;
-  });
-  localforage.setItem("percent", percent, (err) => {
-    if (err) throw err;
-  });
+  await localforage.setItem("rounds", rounds)
+  await localforage.setItem("workTime", workTime)
+  await localforage.setItem("selectedWorkTime", selectedWorkTime)
+  await localforage.setItem("breakTime", breakTime)
+  await localforage.setItem("longBreakTime", longBreakTime)
+  await localforage.setItem("status", status)
+  await localforage.setItem("percent", percent)
 };
 
 export default createLocalDB;
