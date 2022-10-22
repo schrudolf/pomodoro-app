@@ -30,10 +30,11 @@ const Pomodoro = ({
   const intervalref = useRef<number | null>(null);
   const getRealTime = parseInt(settings.workTime);
   const getSeconds = getRealTime % 60;
-  const getMinutes = Math.floor((getRealTime % 3600) / 60);
+  const getMinutes = Math.floor((getRealTime / 60));
   const modofiedSeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
   const modifiedMinutes = getMinutes < 10 ? "0" + getMinutes : getMinutes
   const modifiedTime = modifiedMinutes + ":" + modofiedSeconds
+  console.log(modifiedMinutes)
 
   let clockHandler = () => {
     localforage.getItem(
@@ -41,6 +42,7 @@ const Pomodoro = ({
       (err: any, workTimeValue: string | null) => {
         if (typeof workTimeValue === "string") {
           let parseTime = parseInt(workTimeValue) - 1;
+          console.log(parseTime, parseTime === 0)
           localforage.setItem("workTime", parseTime.toString(), (err) => {
             if (err) throw err;
             localforage.getItem(
