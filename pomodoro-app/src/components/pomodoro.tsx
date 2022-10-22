@@ -30,16 +30,16 @@ const Pomodoro = ({
   const intervalref = useRef<number | null>(null);
   const getRealTime = parseInt(settings.workTime);
   const getSeconds = getRealTime % 60;
-  const getMinutes = Math.floor((getRealTime / 60));
+  const getMinutes = Math.floor(getRealTime / 60);
   const modofiedSeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
-  const modifiedMinutes = getMinutes < 10 ? "0" + getMinutes : getMinutes
-  const modifiedTime = modifiedMinutes + ":" + modofiedSeconds
+  const modifiedMinutes = getMinutes < 10 ? "0" + getMinutes : getMinutes;
+  const modifiedTime = modifiedMinutes + ":" + modofiedSeconds;
   const stopClock = () => {
     if (intervalref.current) {
       window.clearInterval(intervalref.current);
       intervalref.current = null;
     }
-  }
+  };
   const clockHandler = () => {
     localforage.getItem(
       "workTime",
@@ -62,7 +62,7 @@ const Pomodoro = ({
                     workTime: parseTime.toString(),
                     percent: calculateCurrentPercent,
                   }));
-                  if(parseTime === 0){
+                  if (parseTime === 0) {
                     stopClock();
                     return;
                   }
@@ -136,16 +136,10 @@ const Pomodoro = ({
         stopClock();
       });
     });
-    setPomodoroStatus(0);
   };
   const openSettings = () => {
-    setSettings((prevState: any) => ({
-      ...prevState,
-      percent: 0,
-    }));
-    localforage.setItem("percent", 0, (err) => {
-      if (err) throw err;
-    });
+    pausePomodoroApp();
+    resetPomodoroApp();
     setSettingStatus(true);
   };
   return (
