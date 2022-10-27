@@ -118,7 +118,7 @@ const Pomodoro = ({
   const continuePomodoroApp = () => {
     startPomodoroApp();
   };
-  const resetPomodoroApp = () => {
+  const resetWorkTime = () => {
     setPomodoroStatus(0);
     localforage.getItem("selectedWorkTime", (err, value) => {
       if (err) throw err;
@@ -135,7 +135,7 @@ const Pomodoro = ({
   };
   const openSettings = () => {
     pausePomodoroApp();
-    resetPomodoroApp();
+    resetWorkTime();
     setSettingStatus(true);
   };
   return (
@@ -173,7 +173,7 @@ const Pomodoro = ({
         <Button
           variant="contained"
           color="warning"
-          onClick={resetPomodoroApp}
+          onClick={resetWorkTime}
           sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
         >
           Reset Time
@@ -183,7 +183,7 @@ const Pomodoro = ({
         <Button
           variant="contained"
           color="error"
-          onClick={resetPomodoroApp}
+          onClick={resetWorkTime}
           sx={{ width: "83%", margin: "0.3rem", fontWeight: 600 }}
         >
           Full Reset
