@@ -53,8 +53,7 @@ const Pomodoro = ({
     const remainingRounds = await localforage.getItem("rounds");
     const getNewRoundsValue = typeof remainingRounds === "number" && remainingRounds - 1;
     getCurrentStatus === 0 && await localforage.setItem("rounds", getNewRoundsValue);
-    console.log(getCurrentStatus === 0 ? "Was work" : "Was break", getNewRoundsValue)
-    if (getNewRoundsValue === 0) {
+    if (getNewRoundsValue === 0 && getCurrentStatus === 0) {
       console.log("Long Break starts");
     } else {
       const getNewStatus = getCurrentStatus === 0 ? 1 : 0;
