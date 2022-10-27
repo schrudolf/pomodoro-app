@@ -1,4 +1,5 @@
 import * as React from "react";
+import localforage from "localforage";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -16,12 +17,23 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const BreakSlider = (props: {settings: AppSettings, setSettings: (prevState: any) => any }) => {
-  const updateBreakTime = (value: number | number[]) => {
-    props.setSettings((prevState: any) => ({
-      ...prevState,
-      breakTime: value,
-    }));
+const BreakSlider = (props: {
+  settings: AppSettings;
+  setSettings: (prevState: any) => any;
+}) => {
+  const updateBreakTime = async (value: number | number[]) => {
+    try {
+      if (typeof value === "number") {
+        await localforage.setItem("breakTime", (value * 60).toString());
+        await localforage.setItem("selectedBreakTime", (value * 60).toString());
+        props.setSettings((prevState: any) => ({
+          ...prevState,
+          breakTime: (value * 60).toString(),
+        }));
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div>
@@ -33,7 +45,7 @@ const BreakSlider = (props: {settings: AppSettings, setSettings: (prevState: any
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        value={props.settings.breakTime}
+        value={parseInt(props.settings.breakTime) / 60}
         step={5}
         min={5}
         max={30}

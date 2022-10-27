@@ -12,7 +12,7 @@ function App() {
   const [settings, setSettings] = useState({
     rounds: 0,
     workTime: "0",
-    breakTime: 0,
+    breakTime: "300",
     longBreakTime: 0,
     status: 0,
   });

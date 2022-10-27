@@ -153,7 +153,7 @@ const Pomodoro = ({
           </Grid>
           <Grid item xs={1}>
             <Typography fontWeight={600}>
-              {settings.breakTime + ":00"}
+              {(parseInt(settings.breakTime) / 60).toString() + ":00"}
             </Typography>
           </Grid>
           <Grid textAlign={"right"} item xs={2}>
