@@ -10,6 +10,7 @@ type Percent = number;
 type SelectedWorkTime = string;
 type SelectedRounds = number;
 type SelectedBreakTime = string;
+type SelectedLongBreakTime = string;
 
 const createLocalDB = async () => {
   const rounds: Rounds = 4;
@@ -21,6 +22,7 @@ const createLocalDB = async () => {
   const selectedWorkTime: SelectedWorkTime = "1500";
   const selectedRounds: SelectedRounds = 0;
   const selectedBreakTime: SelectedBreakTime = "300";
+  const selectedLongBreakTime: SelectedLongBreakTime = "1800";
   await localforage.setItem("rounds", rounds)
   await localforage.setItem("workTime", workTime)
   await localforage.setItem("breakTime", breakTime)
@@ -30,6 +32,7 @@ const createLocalDB = async () => {
   await localforage.setItem("selectedWorkTime", selectedWorkTime)
   await localforage.setItem("selectedRounds", selectedRounds)
   await localforage.setItem("selectedBreakTime", selectedBreakTime)
+  await localforage.setItem("selectedLongBreakTime", selectedLongBreakTime)
 };
 
 export default createLocalDB;
