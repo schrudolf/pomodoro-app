@@ -1,4 +1,5 @@
 import React from "react";
+import localforage from "localforage";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -16,12 +17,21 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const RoundsSlider = (props: { settings: AppSettings, setSettings: (prevState: any) => any }) => {
-  const updateRounds = (value: number | number[]) => {
-    props.setSettings((prevState: any) => ({
-      ...prevState,
-      rounds: value,
-    }));
+const RoundsSlider = (props: {
+  settings: AppSettings;
+  setSettings: (prevState: any) => any;
+}) => {
+  const updateRounds = async (value: number | number[]) => {
+    try {
+      await localforage.setItem("rounds", value);
+      await localforage.setItem("selectedRounds", value);
+      props.setSettings((prevState: any) => ({
+        ...prevState,
+        rounds: value,
+      }));
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div>
