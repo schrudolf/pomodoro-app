@@ -35,9 +35,11 @@ const Pomodoro = ({
   const getMinutes = Math.floor(getRealTime / 60);
   const getBreakMinutes = Math.floor(getBreakTime / 60);
   const modifiedSeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
-  const modifiedBreakSeconds = getBreakSeconds < 10 ? "0" + getBreakSeconds : getBreakSeconds;
+  const modifiedBreakSeconds =
+    getBreakSeconds < 10 ? "0" + getBreakSeconds : getBreakSeconds;
   const modifiedMinutes = getMinutes < 10 ? "0" + getMinutes : getMinutes;
-  const modifiedBreakMinutes = getBreakMinutes < 10 ? "0" + getBreakMinutes : getBreakMinutes;
+  const modifiedBreakMinutes =
+    getBreakMinutes < 10 ? "0" + getBreakMinutes : getBreakMinutes;
   const modifiedTime = modifiedMinutes + ":" + modifiedSeconds;
   const modifiedBreakTime = modifiedBreakMinutes + ":" + modifiedBreakSeconds;
   const stopClock = () => {
@@ -47,45 +49,60 @@ const Pomodoro = ({
     }
   };
   const updateStatus = async () => {
+    const getCurrentStatus = await localforage.getItem("status");
     const remainingRounds = await localforage.getItem("rounds");
-    const getNewRoundsValue =
-      typeof remainingRounds === "number" && remainingRounds - 1;
-    await localforage.setItem("rounds", getNewRoundsValue);
+    const getNewRoundsValue = typeof remainingRounds === "number" && remainingRounds - 1;
+    getCurrentStatus === 0 && await localforage.setItem("rounds", getNewRoundsValue);
+    console.log(getCurrentStatus === 0 ? "Was work" : "Was break", getNewRoundsValue)
     if (getNewRoundsValue === 0) {
       console.log("Long Break starts");
     } else {
-      await localforage.setItem("status", 1);
+      const getNewStatus = getCurrentStatus === 0 ? 1 : 0;
+      await localforage.setItem("status", getNewStatus);
       setSettings((prevState: any) => ({
         ...prevState,
-        status: 1,
+        status: getNewStatus,
       }));
-      resetWorkTime();
+      pausePomodoroApp();
+      continuePomodoroApp();
     }
   };
   const clockHandler = async () => {
+    const getCurrentStatus = await localforage.getItem("status");
     const workTimeValue = await localforage.getItem("workTime");
-    if (typeof workTimeValue === "string") {
-      let parseTime = parseInt(workTimeValue) - 1;
-      localforage.setItem("workTime", parseTime.toString(), (err) => {
+    const breakTimeValue = await localforage.getItem("breakTime");
+    const timeValue = getCurrentStatus === 0 ? workTimeValue : breakTimeValue;
+    const getDefaultState = getCurrentStatus === 0 ? "workTime" : "breakTime";
+    const getDefaultSelectedState =
+      getCurrentStatus === 0 ? "selectedWorkTime" : "selectedBreakTime";
+    if (typeof timeValue === "string") {
+      let parseTime = parseInt(timeValue) - 1;
+      localforage.setItem(getDefaultState, parseTime.toString(), (err) => {
         if (err) throw err;
         localforage.getItem(
-          "selectedWorkTime",
-          (err: any, selectedWorkTime: string | null) => {
-            if (typeof selectedWorkTime === "string") {
-              let getSelectedTime = parseInt(selectedWorkTime);
-              let getWorkTime = parseInt(workTimeValue);
+          getDefaultSelectedState,
+          (err: any, defaultSelectedTime: string | null) => {
+            if (typeof defaultSelectedTime === "string") {
+              let getSelectedTime = parseInt(defaultSelectedTime);
+              let getWorkTime = parseInt(timeValue);
               let calculateCurrentPercent = Math.round(
                 100 - (getWorkTime / getSelectedTime) * 100
               );
+              getCurrentStatus === 0 ? 
               setSettings((prevState: any) => ({
                 ...prevState,
-                workTime: parseTime.toString(),
                 percent: calculateCurrentPercent,
+                workTime: parseTime.toString(),
+              })) : 
+              setSettings((prevState: any) => ({
+                ...prevState,
+                percent: calculateCurrentPercent,
+                breakTime: parseTime.toString(),
               }));
               if (parseTime === 0) {
-                stopClock();
-                updateStatus();
-                return;
+                localforage.setItem(getDefaultState, defaultSelectedTime, (err) => {
+                  updateStatus();
+                })
               }
             }
           }
@@ -131,8 +148,11 @@ const Pomodoro = ({
   };
   const startPomodoroApp = () => {
     setPomodoroStatus(1);
-    if (intervalref.current !== null) return;
-    intervalref.current = window.setInterval(clockHandler, 1000);
+    if (intervalref.current !== null){
+      return;
+    }else {
+      intervalref.current = window.setInterval(clockHandler, 1000);
+    }
   };
   const pausePomodoroApp = () => {
     setPomodoroStatus(2);
@@ -141,24 +161,28 @@ const Pomodoro = ({
   const continuePomodoroApp = () => {
     startPomodoroApp();
   };
-  const resetWorkTime = () => {
-    setPomodoroStatus(0);
-    localforage.getItem("selectedWorkTime", (err, value) => {
-      if (err) throw err;
-      localforage.setItem("workTime", value, (err) => {
-        if (err) throw err;
-        setSettings((prevState: any) => ({
-          ...prevState,
-          workTime: value,
-          percent: 0,
-        }));
-        stopClock();
-      });
-    });
+  const resetTimes = async () => {
+    try{
+      setPomodoroStatus(0);
+      const selectedWorkTime = await localforage.getItem("selectedWorkTime");
+      const selectedBreakTime = await localforage.getItem("selectedBreakTime");
+      await localforage.setItem("workTime", selectedWorkTime);
+      await localforage.setItem("breakTime", selectedBreakTime);
+      setSettings((prevState: any) => ({
+        ...prevState,
+        workTime: selectedWorkTime,
+        breakTime: selectedBreakTime,
+        percent: 0,
+      }));
+      stopClock();
+    }
+    catch(err){
+      console.log(err)
+    }
   };
   const openSettings = () => {
     pausePomodoroApp();
-    resetWorkTime();
+    resetTimes();
     setSettingStatus(true);
   };
   return (
@@ -176,7 +200,7 @@ const Pomodoro = ({
           </Grid>
           <Grid item xs={1}>
             <Typography fontWeight={600}>
-              {(parseInt(settings.breakTime) / 60).toString() + ":00"}
+              {(parseInt(settings.selectedBreakTime) / 60).toString() + ":00"}
             </Typography>
           </Grid>
           <Grid textAlign={"right"} item xs={2}>
@@ -196,7 +220,7 @@ const Pomodoro = ({
         <Button
           variant="contained"
           color="warning"
-          onClick={resetWorkTime}
+          onClick={resetTimes}
           sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
         >
           Reset Time
@@ -206,7 +230,7 @@ const Pomodoro = ({
         <Button
           variant="contained"
           color="error"
-          onClick={resetWorkTime}
+          onClick={resetTimes}
           sx={{ width: "83%", margin: "0.3rem", fontWeight: 600 }}
         >
           Full Reset

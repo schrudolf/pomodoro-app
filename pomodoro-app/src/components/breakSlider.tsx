@@ -29,6 +29,7 @@ const BreakSlider = (props: {
         props.setSettings((prevState: any) => ({
           ...prevState,
           breakTime: (value * 60).toString(),
+          selectedBreakTime: (value * 60).toString(),
         }));
       }
     } catch (err) {

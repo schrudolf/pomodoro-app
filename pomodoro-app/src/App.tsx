@@ -15,6 +15,7 @@ function App() {
     breakTime: "300",
     longBreakTime: "1800",
     status: 0,
+    selectedBreakTime: "300"
   });
 
   useEffect(() => {
@@ -34,6 +35,7 @@ function App() {
             );
             const statusValue = await localforage.getItem("status");
             const percentValue = await localforage.getItem("percent");
+            const selectedBreakTimeValue = await localforage.getItem("selectedBreakTime");
             setSettings((prevState: any) => ({
               ...prevState,
               breakTime: breakTimeValue,
@@ -41,7 +43,8 @@ function App() {
               rounds: roundsValue,
               workTime: workTimeValue,
               status: statusValue,
-              percent: percentValue
+              percent: percentValue,
+              selectedBreakTime: selectedBreakTimeValue
             }));
             setIsAppReady(true);
           } catch (err) {

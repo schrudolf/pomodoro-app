@@ -4,7 +4,7 @@ import localforage from "localforage";
 type Rounds = number;
 type WorkTime = string;
 type BreakTime = string;
-type LongBreakTime = number;
+type LongBreakTime = string;
 type Status = number;
 type Percent = number;
 type SelectedWorkTime = string;
@@ -16,7 +16,7 @@ const createLocalDB = async () => {
   const rounds: Rounds = 4;
   const workTime: WorkTime = "1500";
   const breakTime: BreakTime = "300";
-  const longBreakTime: LongBreakTime = 10;
+  const longBreakTime: LongBreakTime = "1800";
   const status: Status = 0;
   const percent: Percent = 0;
   const selectedWorkTime: SelectedWorkTime = "1500";
