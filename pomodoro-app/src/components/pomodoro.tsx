@@ -40,39 +40,35 @@ const Pomodoro = ({
       intervalref.current = null;
     }
   };
-  const clockHandler = () => {
-    localforage.getItem(
-      "workTime",
-      (err: any, workTimeValue: string | null) => {
-        if (typeof workTimeValue === "string") {
-          let parseTime = parseInt(workTimeValue) - 1;
-          localforage.setItem("workTime", parseTime.toString(), (err) => {
-            if (err) throw err;
-            localforage.getItem(
-              "selectedWorkTime",
-              (err: any, selectedWorkTime: string | null) => {
-                if (typeof selectedWorkTime === "string") {
-                  let getSelectedTime = parseInt(selectedWorkTime);
-                  let getWorkTime = parseInt(workTimeValue);
-                  let calculateCurrentPercent = Math.round(
-                    100 - (getWorkTime / getSelectedTime) * 100
-                  );
-                  setSettings((prevState: any) => ({
-                    ...prevState,
-                    workTime: parseTime.toString(),
-                    percent: calculateCurrentPercent,
-                  }));
-                  if (parseTime === 0) {
-                    stopClock();
-                    return;
-                  }
-                }
+  const clockHandler = async () => {
+    const workTimeValue = await localforage.getItem("workTime");
+    if (typeof workTimeValue === "string") {
+      let parseTime = parseInt(workTimeValue) - 1;
+      localforage.setItem("workTime", parseTime.toString(), (err) => {
+        if (err) throw err;
+        localforage.getItem(
+          "selectedWorkTime",
+          (err: any, selectedWorkTime: string | null) => {
+            if (typeof selectedWorkTime === "string") {
+              let getSelectedTime = parseInt(selectedWorkTime);
+              let getWorkTime = parseInt(workTimeValue);
+              let calculateCurrentPercent = Math.round(
+                100 - (getWorkTime / getSelectedTime) * 100
+              );
+              setSettings((prevState: any) => ({
+                ...prevState,
+                workTime: parseTime.toString(),
+                percent: calculateCurrentPercent,
+              }));
+              if (parseTime === 0) {
+                stopClock();
+                return;
               }
-            );
-          });
-        }
-      }
-    );
+            }
+          }
+        );
+      });
+    }
   };
 
   const getHandlerButton = (status: number) => {
