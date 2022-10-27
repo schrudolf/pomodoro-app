@@ -26,7 +26,7 @@ function CircularProgressWithLabel(props: any) {
         }}
       >
         <Typography variant="h5">
-          Work
+          {props.status === 0 ? "Work" : "Break"}
           <div>
             <Typography variant="h2" color="text.secondary">
               {`${Math.round(props.value)}%`}
@@ -39,7 +39,7 @@ function CircularProgressWithLabel(props: any) {
 }
 
 const CircleProgress = (props: { settings: any }) => {
-  return <CircularProgressWithLabel value={props.settings.percent} />;
+  return <CircularProgressWithLabel value={props.settings.percent} status={props.settings.status} />;
 };
 
 export default CircleProgress;

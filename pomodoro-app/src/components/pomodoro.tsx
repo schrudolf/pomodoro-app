@@ -29,15 +29,37 @@ const Pomodoro = ({
   const [pomodoroStatus, setPomodoroStatus] = useState(0);
   const intervalref = useRef<number | null>(null);
   const getRealTime = parseInt(settings.workTime);
+  const getBreakTime = parseInt(settings.breakTime);
   const getSeconds = getRealTime % 60;
+  const getBreakSeconds = getBreakTime % 60;
   const getMinutes = Math.floor(getRealTime / 60);
-  const modofiedSeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
+  const getBreakMinutes = Math.floor(getBreakTime / 60);
+  const modifiedSeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
+  const modifiedBreakSeconds = getBreakSeconds < 10 ? "0" + getBreakSeconds : getBreakSeconds;
   const modifiedMinutes = getMinutes < 10 ? "0" + getMinutes : getMinutes;
-  const modifiedTime = modifiedMinutes + ":" + modofiedSeconds;
+  const modifiedBreakMinutes = getBreakMinutes < 10 ? "0" + getBreakMinutes : getBreakMinutes;
+  const modifiedTime = modifiedMinutes + ":" + modifiedSeconds;
+  const modifiedBreakTime = modifiedBreakMinutes + ":" + modifiedBreakSeconds;
   const stopClock = () => {
     if (intervalref.current) {
       window.clearInterval(intervalref.current);
       intervalref.current = null;
+    }
+  };
+  const updateStatus = async () => {
+    const remainingRounds = await localforage.getItem("rounds");
+    const getNewRoundsValue =
+      typeof remainingRounds === "number" && remainingRounds - 1;
+    await localforage.setItem("rounds", getNewRoundsValue);
+    if (getNewRoundsValue === 0) {
+      console.log("Long Break starts");
+    } else {
+      await localforage.setItem("status", 1);
+      setSettings((prevState: any) => ({
+        ...prevState,
+        status: 1,
+      }));
+      resetWorkTime();
     }
   };
   const clockHandler = async () => {
@@ -62,6 +84,7 @@ const Pomodoro = ({
               }));
               if (parseTime === 0) {
                 stopClock();
+                updateStatus();
                 return;
               }
             }
@@ -145,7 +168,7 @@ const Pomodoro = ({
       </Box>
       <Box textAlign={"center"} my={3}>
         <Typography variant="h2" color="text.secondary">
-          {modifiedTime}
+          {settings.status === 0 ? modifiedTime : modifiedBreakTime}
         </Typography>
         <Grid textAlign={"center"} container sx={{ color: "text.primary" }}>
           <Grid textAlign={"right"} item xs={4}>
@@ -163,7 +186,7 @@ const Pomodoro = ({
           </Grid>
           <Grid textAlign={"left"} item xs={4}>
             <Typography fontWeight={600}>
-            {(parseInt(settings.longBreakTime) / 60).toString() + ":00"}
+              {(parseInt(settings.longBreakTime) / 60).toString() + ":00"}
             </Typography>
           </Grid>
         </Grid>
