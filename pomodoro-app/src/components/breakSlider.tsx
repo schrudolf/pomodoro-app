@@ -45,7 +45,6 @@ const BreakSlider = (props: {
         Break time:
       </Typography>
       <SlideStyle
-        aria-label="ios slider"
         value={parseInt(props.settings.breakTime) / 60}
         step={5}
         min={5}

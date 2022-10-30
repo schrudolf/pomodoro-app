@@ -169,11 +169,13 @@ const Pomodoro = ({
       const selectedBreakTime = await localforage.getItem("selectedBreakTime");
       await localforage.setItem("workTime", selectedWorkTime);
       await localforage.setItem("breakTime", selectedBreakTime);
+      await localforage.setItem("status", 0);
       setSettings((prevState: any) => ({
         ...prevState,
         workTime: selectedWorkTime,
         breakTime: selectedBreakTime,
         percent: 0,
+        status: 0
       }));
       stopClock();
     }
@@ -191,6 +193,7 @@ const Pomodoro = ({
       await localforage.setItem("breakTime", selectedBreakTime);
       await localforage.setItem("selectedRounds", selectedRoundsValue);
       await localforage.setItem("rounds", 0);
+      await localforage.setItem("status", 0);
       setSettings((prevState: any) => ({
         ...prevState,
         workTime: selectedWorkTime,
@@ -198,6 +201,7 @@ const Pomodoro = ({
         selectedRounds: selectedRoundsValue,
         rounds: 0,
         percent: 0,
+        status: 0,
       }));
       stopClock();
     }catch(err){
@@ -206,7 +210,7 @@ const Pomodoro = ({
   }
   const openSettings = () => {
     pausePomodoroApp();
-    resetTimes();
+    fullReset();
     setSettingStatus(true);
   };
   return (

@@ -43,7 +43,6 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
         Work time:
       </Typography>
       <SlideStyle
-        aria-label="ios slider"
         value={parseInt(props.settings.workTime) / 60}
         step={5}
         min={5}

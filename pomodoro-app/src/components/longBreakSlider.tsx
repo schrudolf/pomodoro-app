@@ -44,7 +44,6 @@ const LongBreakSlider = (props: {settings: AppSettings, setSettings: (prevState:
         Long break time:
       </Typography>
       <SlideStyle
-        aria-label="ios slider"
         value={parseInt(props.settings.longBreakTime) / 60}
         step={5}
         min={10}

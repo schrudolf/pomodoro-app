@@ -41,7 +41,6 @@ const RoundsSlider = (props: {
         Rounds:
       </Typography>
       <SlideStyle
-        aria-label="ios slider"
         value={props.settings.selectedRounds}
         step={1}
         min={1}
