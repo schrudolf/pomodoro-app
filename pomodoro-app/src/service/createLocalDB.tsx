@@ -1,4 +1,3 @@
-import React from "react";
 import localforage from "localforage";
 
 type Rounds = number;
@@ -13,14 +12,14 @@ type SelectedBreakTime = string;
 type SelectedLongBreakTime = string;
 
 const createLocalDB = async () => {
-  const rounds: Rounds = 4;
+  const rounds: Rounds = 0;
   const workTime: WorkTime = "1500";
   const breakTime: BreakTime = "300";
   const longBreakTime: LongBreakTime = "1800";
   const status: Status = 0;
   const percent: Percent = 0;
   const selectedWorkTime: SelectedWorkTime = "1500";
-  const selectedRounds: SelectedRounds = 0;
+  const selectedRounds: SelectedRounds = 4;
   const selectedBreakTime: SelectedBreakTime = "300";
   const selectedLongBreakTime: SelectedLongBreakTime = "1800";
   await localforage.setItem("rounds", rounds)

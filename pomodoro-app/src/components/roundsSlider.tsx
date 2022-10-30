@@ -23,11 +23,9 @@ const RoundsSlider = (props: {
 }) => {
   const updateRounds = async (value: number | number[]) => {
     try {
-      await localforage.setItem("rounds", value);
       await localforage.setItem("selectedRounds", value);
       props.setSettings((prevState: any) => ({
         ...prevState,
-        rounds: value,
         selectedRounds: value,
       }));
     } catch (err) {
@@ -44,7 +42,7 @@ const RoundsSlider = (props: {
       </Typography>
       <SlideStyle
         aria-label="ios slider"
-        value={props.settings.rounds}
+        value={props.settings.selectedRounds}
         step={1}
         min={1}
         max={10}

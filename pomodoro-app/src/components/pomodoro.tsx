@@ -62,7 +62,7 @@ const Pomodoro = ({
       setSettings((prevState: any) => ({
         ...prevState,
         status: getNewStatus,
-        selectedRounds: getCurrentStatus === 0 ? prevState.selectedRounds + 1 : prevState.selectedRounds
+        rounds: getCurrentStatus === 0 ? prevState.rounds + 1 : prevState.rounds
       }));
       pausePomodoroApp();
       continuePomodoroApp();
@@ -195,7 +195,7 @@ const Pomodoro = ({
         <Typography variant="h2" color="text.secondary">
           {settings.status === 0 ? modifiedTime : modifiedBreakTime}
         </Typography>
-        <Rating name="read-only" value={settings.selectedRounds - settings.rounds} max={settings.selectedRounds} readOnly />
+        <Rating name="read-only" value={settings.rounds} max={settings.selectedRounds} readOnly />
         <Grid textAlign={"center"} container sx={{ color: "text.primary" }}>
           <Grid textAlign={"right"} item xs={4}>
             <SelfImprovementIcon sx={{ color: "white", marginRight: "4px" }} />
