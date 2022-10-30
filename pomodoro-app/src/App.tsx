@@ -15,7 +15,8 @@ function App() {
     breakTime: "300",
     longBreakTime: "1800",
     status: 0,
-    selectedBreakTime: "300"
+    selectedBreakTime: "300",
+    selectedRounds: 0,
   });
 
   useEffect(() => {

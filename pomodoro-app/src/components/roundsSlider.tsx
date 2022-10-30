@@ -28,6 +28,7 @@ const RoundsSlider = (props: {
       props.setSettings((prevState: any) => ({
         ...prevState,
         rounds: value,
+        selectedRounds: value,
       }));
     } catch (err) {
       console.log(err);

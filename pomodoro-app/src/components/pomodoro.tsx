@@ -9,6 +9,7 @@ import CircleProgress from "./circleProgress";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import Rating from '@mui/material/Rating';
 
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import WeekendIcon from "@mui/icons-material/Weekend";
@@ -61,6 +62,7 @@ const Pomodoro = ({
       setSettings((prevState: any) => ({
         ...prevState,
         status: getNewStatus,
+        selectedRounds: getCurrentStatus === 0 ? prevState.selectedRounds + 1 : prevState.selectedRounds
       }));
       pausePomodoroApp();
       continuePomodoroApp();
@@ -193,6 +195,7 @@ const Pomodoro = ({
         <Typography variant="h2" color="text.secondary">
           {settings.status === 0 ? modifiedTime : modifiedBreakTime}
         </Typography>
+        <Rating name="read-only" value={settings.selectedRounds - settings.rounds} max={settings.selectedRounds} readOnly />
         <Grid textAlign={"center"} container sx={{ color: "text.primary" }}>
           <Grid textAlign={"right"} item xs={4}>
             <SelfImprovementIcon sx={{ color: "white", marginRight: "4px" }} />
