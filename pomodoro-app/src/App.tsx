@@ -5,16 +5,18 @@ import "./App.css";
 import Settings from "./components/settings";
 import Pomodoro from "./components/pomodoro";
 import createLocalDB from "./service/createLocalDB";
+import { AppSettings } from "./models/settings";
 
 function App() {
   const [isAppReady, setIsAppReady] = useState(false);
   const [isSettingsActive, setSettingStatus] = useState<Boolean>(false);
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<AppSettings>({
     rounds: 0,
     workTime: "0",
     breakTime: "300",
     longBreakTime: "1800",
     status: 0,
+    persent: 0,
     selectedBreakTime: "300",
     selectedRounds: 4,
   });
@@ -38,16 +40,16 @@ function App() {
             const percentValue = await localforage.getItem("percent");
             const selectedBreakTimeValue = await localforage.getItem("selectedBreakTime");
             const selectedRoundsValue = await localforage.getItem("selectedRounds");
-            setSettings((prevState: any) => ({
+            setSettings((prevState: AppSettings) => ({
               ...prevState,
-              breakTime: breakTimeValue,
-              longBreakTime: longBreakTimeValue,
-              rounds: roundsValue,
-              workTime: workTimeValue,
-              status: statusValue,
-              percent: percentValue,
-              selectedBreakTime: selectedBreakTimeValue,
-              selectedRounds: selectedRoundsValue
+              breakTime: breakTimeValue as string,
+              longBreakTime: longBreakTimeValue as string,
+              rounds: roundsValue as number,
+              workTime: workTimeValue as string,
+              status: statusValue as number,
+              percent: percentValue as number,
+              selectedBreakTime: selectedBreakTimeValue as string,
+              selectedRounds: selectedRoundsValue as number
             }));
             setIsAppReady(true);
           } catch (err) {
