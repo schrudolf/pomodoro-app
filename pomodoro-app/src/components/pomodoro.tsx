@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import localforage from "localforage";
+import pomodoroHandler from "../service/pomodoroHandler";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -43,74 +44,6 @@ const Pomodoro = ({
     getBreakMinutes < 10 ? "0" + getBreakMinutes : getBreakMinutes;
   const modifiedTime = modifiedMinutes + ":" + modifiedSeconds;
   const modifiedBreakTime = modifiedBreakMinutes + ":" + modifiedBreakSeconds;
-  const stopClock = () => {
-    if (intervalref.current) {
-      window.clearInterval(intervalref.current);
-      intervalref.current = null;
-    }
-  };
-  const updateStatus = async () => {
-    const getCurrentStatus = await localforage.getItem("status");
-    const remainingRounds = await localforage.getItem("rounds");
-    const getNewRoundsValue = typeof remainingRounds === "number" && remainingRounds - 1;
-    getCurrentStatus === 0 && await localforage.setItem("rounds", getNewRoundsValue);
-    if (getNewRoundsValue === 0 && getCurrentStatus === 0) {
-      console.log("Long Break starts");
-    } else {
-      const getNewStatus = getCurrentStatus === 0 ? 1 : 0;
-      await localforage.setItem("status", getNewStatus);
-      setSettings((prevState: any) => ({
-        ...prevState,
-        status: getNewStatus,
-        rounds: getCurrentStatus === 0 ? prevState.rounds + 1 : prevState.rounds
-      }));
-      pausePomodoroApp();
-      continuePomodoroApp();
-    }
-  };
-  const clockHandler = async () => {
-    const getCurrentStatus = await localforage.getItem("status");
-    const workTimeValue = await localforage.getItem("workTime");
-    const breakTimeValue = await localforage.getItem("breakTime");
-    const timeValue = getCurrentStatus === 0 ? workTimeValue : breakTimeValue;
-    const getDefaultState = getCurrentStatus === 0 ? "workTime" : "breakTime";
-    const getDefaultSelectedState =
-      getCurrentStatus === 0 ? "selectedWorkTime" : "selectedBreakTime";
-    if (typeof timeValue === "string") {
-      let parseTime = parseInt(timeValue) - 1;
-      localforage.setItem(getDefaultState, parseTime.toString(), (err) => {
-        if (err) throw err;
-        localforage.getItem(
-          getDefaultSelectedState,
-          (err: any, defaultSelectedTime: string | null) => {
-            if (typeof defaultSelectedTime === "string") {
-              let getSelectedTime = parseInt(defaultSelectedTime);
-              let getWorkTime = parseInt(timeValue);
-              let calculateCurrentPercent = Math.round(
-                100 - (getWorkTime / getSelectedTime) * 100
-              );
-              getCurrentStatus === 0 ? 
-              setSettings((prevState: any) => ({
-                ...prevState,
-                percent: calculateCurrentPercent,
-                workTime: parseTime.toString(),
-              })) : 
-              setSettings((prevState: any) => ({
-                ...prevState,
-                percent: calculateCurrentPercent,
-                breakTime: parseTime.toString(),
-              }));
-              if (parseTime === 0) {
-                localforage.setItem(getDefaultState, defaultSelectedTime, (err) => {
-                  updateStatus();
-                })
-              }
-            }
-          }
-        );
-      });
-    }
-  };
 
   const getHandlerButton = (status: number) => {
     if (status === 0) {
@@ -149,15 +82,11 @@ const Pomodoro = ({
   };
   const startPomodoroApp = () => {
     setPomodoroStatus(1);
-    if (intervalref.current !== null){
-      return;
-    }else {
-      intervalref.current = window.setInterval(clockHandler, 1000);
-    }
+    pomodoroHandler.startTimer(intervalref, setSettings)
   };
   const pausePomodoroApp = () => {
     setPomodoroStatus(2);
-    stopClock();
+    pomodoroHandler.stopTimer(intervalref);
   };
   const continuePomodoroApp = () => {
     startPomodoroApp();
@@ -177,7 +106,7 @@ const Pomodoro = ({
         percent: 0,
         status: 0
       }));
-      stopClock();
+      pomodoroHandler.stopTimer(intervalref);
     }
     catch(err){
       console.log(err)
@@ -203,7 +132,7 @@ const Pomodoro = ({
         percent: 0,
         status: 0,
       }));
-      stopClock();
+      pomodoroHandler.stopTimer(intervalref);
     }catch(err){
       console.log(err);
     }
