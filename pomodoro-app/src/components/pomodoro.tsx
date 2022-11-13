@@ -90,11 +90,11 @@ const Pomodoro = ({
   };
   const resetTimes = () => {
     setPomodoroStatus(0);
-    pomodoroHandler.resetTimes();
+    pomodoroHandler.resetTimes(setSettings, intervalref);
   };
   const fullReset = async () => {
     setPomodoroStatus(0);
-    pomodoroHandler.fullReset();
+    pomodoroHandler.fullReset(setSettings, intervalref);
   };
   const openSettings = () => {
     pausePomodoroApp();

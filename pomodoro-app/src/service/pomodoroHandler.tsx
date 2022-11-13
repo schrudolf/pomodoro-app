@@ -131,26 +131,26 @@ class Pomodoro {
       console.log("long long pomo2 update state");
     }
   }
-  async resetTimes() {
+  async resetTimes(setSettings: any, intervalref: any) {
     try {
       const selectedWorkTime = await localforage.getItem("selectedWorkTime");
       const selectedBreakTime = await localforage.getItem("selectedBreakTime");
       await localforage.setItem("workTime", selectedWorkTime);
       await localforage.setItem("breakTime", selectedBreakTime);
       await localforage.setItem("status", 0);
-      this.updatePomodoroState((prevState: any) => ({
+      setSettings((prevState: any) => ({
         ...prevState,
         workTime: selectedWorkTime,
         breakTime: selectedBreakTime,
         percent: 0,
         status: 0,
       }));
-      this.stopTimer(this.activeIntervalRef);
+      this.stopTimer(intervalref);
     } catch (err) {
       console.log(err);
     }
   }
-  async fullReset() {
+  async fullReset(setSettings: any, intervalref: any) {
     try {
       const selectedWorkTime = await localforage.getItem("selectedWorkTime");
       const selectedBreakTime = await localforage.getItem("selectedBreakTime");
@@ -160,7 +160,7 @@ class Pomodoro {
       await localforage.setItem("selectedRounds", selectedRoundsValue);
       await localforage.setItem("rounds", 0);
       await localforage.setItem("status", 0);
-      this.updatePomodoroState((prevState: any) => ({
+      setSettings((prevState: any) => ({
         ...prevState,
         workTime: selectedWorkTime,
         breakTime: selectedBreakTime,
@@ -169,7 +169,7 @@ class Pomodoro {
         percent: 0,
         status: 0,
       }));
-      this.stopTimer(this.activeIntervalRef);
+      this.stopTimer(intervalref);
     } catch (err) {
       console.log(err);
     }
