@@ -91,26 +91,9 @@ const Pomodoro = ({
   const continuePomodoroApp = () => {
     startPomodoroApp();
   };
-  const resetTimes = async () => {
-    try{
+  const resetTimes = () => {
       setPomodoroStatus(0);
-      const selectedWorkTime = await localforage.getItem("selectedWorkTime");
-      const selectedBreakTime = await localforage.getItem("selectedBreakTime");
-      await localforage.setItem("workTime", selectedWorkTime);
-      await localforage.setItem("breakTime", selectedBreakTime);
-      await localforage.setItem("status", 0);
-      setSettings((prevState: any) => ({
-        ...prevState,
-        workTime: selectedWorkTime,
-        breakTime: selectedBreakTime,
-        percent: 0,
-        status: 0
-      }));
-      pomodoroHandler.stopTimer(intervalref);
-    }
-    catch(err){
-      console.log(err)
-    }
+      pomodoroHandler.resetTimes()
   };
   const fullReset = async () => {
     try{
