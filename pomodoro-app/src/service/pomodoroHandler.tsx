@@ -114,10 +114,34 @@ class Pomodoro {
         percent: 0,
         status: 0
       }));
-      pomodoroHandler.stopTimer(this.activeIntervalRef);
+      this.stopTimer(this.activeIntervalRef);
     }
     catch(err){
       console.log(err)
+    }
+  }
+  async fullReset(){
+    try{
+      const selectedWorkTime = await localforage.getItem("selectedWorkTime");
+      const selectedBreakTime = await localforage.getItem("selectedBreakTime");
+      const selectedRoundsValue = await localforage.getItem("selectedRounds");
+      await localforage.setItem("workTime", selectedWorkTime);
+      await localforage.setItem("breakTime", selectedBreakTime);
+      await localforage.setItem("selectedRounds", selectedRoundsValue);
+      await localforage.setItem("rounds", 0);
+      await localforage.setItem("status", 0);
+      this.updatePomodoroState((prevState: any) => ({
+        ...prevState,
+        workTime: selectedWorkTime,
+        breakTime: selectedBreakTime,
+        selectedRounds: selectedRoundsValue,
+        rounds: 0,
+        percent: 0,
+        status: 0,
+      }));
+      this.stopTimer(this.activeIntervalRef);
+    }catch(err){
+      console.log(err);
     }
   }
 }
