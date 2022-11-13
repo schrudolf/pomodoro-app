@@ -24,9 +24,11 @@ const RoundsSlider = (props: {
   const updateRounds = async (value: number | number[]) => {
     try {
       await localforage.setItem("selectedRounds", value);
+      await localforage.setItem("rounds", value);
       props.setSettings((prevState: any) => ({
         ...prevState,
         selectedRounds: value,
+        rounds: value
       }));
     } catch (err) {
       console.log(err);

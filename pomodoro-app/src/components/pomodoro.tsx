@@ -116,7 +116,7 @@ const Pomodoro = ({
         </Typography>
         <Rating
           name="read-only"
-          value={settings.rounds}
+          value={settings.selectedRounds - settings.rounds}
           max={settings.selectedRounds}
           readOnly
         />
@@ -136,7 +136,7 @@ const Pomodoro = ({
           </Grid>
           <Grid textAlign={"left"} item xs={4}>
             <Typography fontWeight={600}>
-              {(parseInt(settings.longBreakTime) / 60).toString() + ":00"}
+              {(parseInt(settings.selectedLongBreakTime) / 60).toString() + ":00"}
             </Typography>
           </Grid>
         </Grid>

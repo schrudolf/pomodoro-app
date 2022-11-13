@@ -82,21 +82,34 @@ class Pomodoro {
           getCurrentStatus,
         ]);
       } else {
-        console.log("Longlong long break");
+        const longBreakTimeValue = await localforage.getItem("longBreakTime");
+        timeValue = longBreakTimeValue;
+        getCurrentState = "longBreakTime";
+        getSelectedStateTime = "selectedLongBreakTime";
+        res([
+          timeValue,
+          getCurrentState,
+          getSelectedStateTime,
+          getCurrentStatus,
+        ]);
       }
     });
   }
   async updatePomodoroStatus() {
     try {
       const getCurrentStatus = await localforage.getItem("status");
-      const remainingRounds = await localforage.getItem("rounds");
-      const getNewRoundsValue =
-        typeof remainingRounds === "number" && remainingRounds - 1;
-      getCurrentStatus === 0 &&
-        (await localforage.setItem("rounds", getNewRoundsValue));
+      const remainingRounds = await localforage.getItem("rounds") as number;
+      const selectedRounds = await localforage.getItem("selectedRounds") as number;
+      getCurrentStatus === 0 && (await localforage.setItem("rounds", (remainingRounds - 1)));
       this.playAudio();
-      if (getNewRoundsValue === 0 && getCurrentStatus === 0) {
-        console.log("Long Break starts");
+      let isFinalStage = (selectedRounds - (remainingRounds -1)) === selectedRounds
+      if (isFinalStage && getCurrentStatus === 0) {
+        await localforage.setItem("status", 2);
+        this.updatePomodoroState((prevState: any) => ({
+          ...prevState,
+          status: 2,
+          rounds: prevState.rounds - 1
+        }));
       } else {
         const getNewStatus = getCurrentStatus === 0 ? 1 : 0;
         await localforage.setItem("status", getNewStatus);
@@ -104,7 +117,7 @@ class Pomodoro {
           ...prevState,
           status: getNewStatus,
           rounds:
-            getCurrentStatus === 0 ? prevState.rounds + 1 : prevState.rounds,
+            getCurrentStatus === 0 ? prevState.rounds - 1 : prevState.rounds,
         }));
       }
     } catch (err) {
@@ -129,7 +142,11 @@ class Pomodoro {
         breakTime: parseTime.toString(),
       }));
     } else {
-      console.log("long long pomo2 update state");
+      this.updatePomodoroState((prevState: any) => ({
+        ...prevState,
+        percent: calculateCurrentPercent,
+        longBreakTime: parseTime.toString(),
+      }));
     }
   }
   async resetTimes(setSettings: any, intervalref: any) {
@@ -159,14 +176,14 @@ class Pomodoro {
       await localforage.setItem("workTime", selectedWorkTime);
       await localforage.setItem("breakTime", selectedBreakTime);
       await localforage.setItem("selectedRounds", selectedRoundsValue);
-      await localforage.setItem("rounds", 0);
+      await localforage.setItem("rounds", selectedRoundsValue);
       await localforage.setItem("status", 0);
       setSettings((prevState: any) => ({
         ...prevState,
         workTime: selectedWorkTime,
         breakTime: selectedBreakTime,
         selectedRounds: selectedRoundsValue,
-        rounds: 0,
+        rounds: selectedRoundsValue,
         percent: 0,
         status: 0,
       }));

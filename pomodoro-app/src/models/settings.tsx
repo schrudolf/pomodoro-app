@@ -6,5 +6,6 @@ export interface AppSettings {
   status: number;
   persent: number;
   selectedBreakTime: string;
+  selectedLongBreakTime: string;
   selectedRounds: number;
 }
