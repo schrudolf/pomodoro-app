@@ -10,7 +10,7 @@ import CircleProgress from "./circleProgress";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import Rating from '@mui/material/Rating';
+import Rating from "@mui/material/Rating";
 
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import WeekendIcon from "@mui/icons-material/Weekend";
@@ -70,7 +70,7 @@ const Pomodoro = ({
     } else {
       return (
         <Button
-          onClick={continuePomodoroApp}
+          onClick={startPomodoroApp}
           variant="contained"
           color="success"
           sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
@@ -82,23 +82,20 @@ const Pomodoro = ({
   };
   const startPomodoroApp = () => {
     setPomodoroStatus(1);
-    pomodoroHandler.startTimer(intervalref, setSettings)
+    pomodoroHandler.startTimer(intervalref, setSettings);
   };
   const pausePomodoroApp = () => {
     setPomodoroStatus(2);
     pomodoroHandler.stopTimer(intervalref);
   };
-  const continuePomodoroApp = () => {
-    startPomodoroApp();
-  };
   const resetTimes = () => {
-      setPomodoroStatus(0);
-      pomodoroHandler.resetTimes()
+    setPomodoroStatus(0);
+    pomodoroHandler.resetTimes();
   };
   const fullReset = async () => {
     setPomodoroStatus(0);
-    pomodoroHandler.fullReset()
-  }
+    pomodoroHandler.fullReset();
+  };
   const openSettings = () => {
     pausePomodoroApp();
     fullReset();
@@ -113,7 +110,12 @@ const Pomodoro = ({
         <Typography variant="h2" color="text.secondary">
           {settings.status === 0 ? modifiedTime : modifiedBreakTime}
         </Typography>
-        <Rating name="read-only" value={settings.rounds} max={settings.selectedRounds} readOnly />
+        <Rating
+          name="read-only"
+          value={settings.rounds}
+          max={settings.selectedRounds}
+          readOnly
+        />
         <Grid textAlign={"center"} container sx={{ color: "text.primary" }}>
           <Grid textAlign={"right"} item xs={4}>
             <SelfImprovementIcon sx={{ color: "white", marginRight: "4px" }} />
