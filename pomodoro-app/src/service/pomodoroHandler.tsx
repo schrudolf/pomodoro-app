@@ -1,4 +1,3 @@
-import React from "react";
 import localforage from "localforage";
 const audioFile = require('../assets/audio.mp3');
 

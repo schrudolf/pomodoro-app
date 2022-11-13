@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import localforage from "localforage";
+import { useState, useRef } from "react";
 import pomodoroHandler from "../service/pomodoroHandler";
 
 import Box from "@mui/material/Box";
