@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+
+function getCurrentState(stateValue: number): string {
+  if (stateValue === 0) {
+    return "Work";
+  } else if (stateValue === 1) {
+    return "Break";
+  } else {
+    return "LongBreak";
+  }
+}
 
 function CircularProgressWithLabel(props: any) {
   return (
@@ -9,7 +19,7 @@ function CircularProgressWithLabel(props: any) {
       <CircularProgress
         color="primary"
         size={300}
-        sx={{boxShadow: "inset 0px 0px 0px 25px black", borderRadius: "100%"}}
+        sx={{ boxShadow: "inset 0px 0px 0px 25px black", borderRadius: "100%" }}
         variant="determinate"
         {...props}
       />
@@ -26,7 +36,7 @@ function CircularProgressWithLabel(props: any) {
         }}
       >
         <Typography variant="h5">
-          {props.status === 0 ? "Work" : "Break"}
+          {getCurrentState(props.status)}
           <div>
             <Typography variant="h2" color="text.secondary">
               {`${Math.round(props.value)}%`}
@@ -39,7 +49,12 @@ function CircularProgressWithLabel(props: any) {
 }
 
 const CircleProgress = (props: { settings: any }) => {
-  return <CircularProgressWithLabel value={props.settings.percent} status={props.settings.status} />;
+  return (
+    <CircularProgressWithLabel
+      value={props.settings.percent}
+      status={props.settings.status}
+    />
+  );
 };
 
 export default CircleProgress;

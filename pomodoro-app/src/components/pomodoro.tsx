@@ -29,21 +29,26 @@ const Pomodoro = ({
 }: pomodoroProps) => {
   const [pomodoroStatus, setPomodoroStatus] = useState(0);
   const intervalref = useRef<number | null>(null);
-  const getRealTime = parseInt(settings.workTime);
-  const getBreakTime = parseInt(settings.breakTime);
-  const getSeconds = getRealTime % 60;
-  const getBreakSeconds = getBreakTime % 60;
-  const getMinutes = Math.floor(getRealTime / 60);
-  const getBreakMinutes = Math.floor(getBreakTime / 60);
-  const modifiedSeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
-  const modifiedBreakSeconds =
-    getBreakSeconds < 10 ? "0" + getBreakSeconds : getBreakSeconds;
-  const modifiedMinutes = getMinutes < 10 ? "0" + getMinutes : getMinutes;
-  const modifiedBreakMinutes =
-    getBreakMinutes < 10 ? "0" + getBreakMinutes : getBreakMinutes;
-  const modifiedTime = modifiedMinutes + ":" + modifiedSeconds;
-  const modifiedBreakTime = modifiedBreakMinutes + ":" + modifiedBreakSeconds;
 
+  const parseCurrentTime = (timeValue: string) => {
+    const getTimeInNumber = parseInt(timeValue);
+    const getSeconds = getTimeInNumber % 60;
+    const getMinutes = Math.floor(getTimeInNumber / 60);
+    const modifiedSeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
+    const modifiedMinutes = getMinutes < 10 ? "0" + getMinutes : getMinutes;
+    const modifiedTime = modifiedMinutes + ":" + modifiedSeconds;
+    return modifiedTime;
+  };
+
+  const getCurrentTime = (currentStatus: number): string => {
+    if (currentStatus === 0) {
+      return parseCurrentTime(settings.workTime);
+    } else if (currentStatus === 1) {
+      return parseCurrentTime(settings.breakTime);
+    } else {
+      return parseCurrentTime(settings.longBreakTime);
+    }
+  };
   const getHandlerButton = (status: number) => {
     if (status === 0) {
       return (
@@ -107,7 +112,7 @@ const Pomodoro = ({
       </Box>
       <Box textAlign={"center"} my={3}>
         <Typography variant="h2" color="text.secondary">
-          {settings.status === 0 ? modifiedTime : modifiedBreakTime}
+          {getCurrentTime(settings.status)}
         </Typography>
         <Rating
           name="read-only"
