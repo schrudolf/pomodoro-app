@@ -1,5 +1,6 @@
 import React from "react";
 import localforage from "localforage";
+const audioFile = require('../assets/audio.mp3');
 
 class Pomodoro {
   updatePomodoroState: any;
@@ -94,6 +95,7 @@ class Pomodoro {
         typeof remainingRounds === "number" && remainingRounds - 1;
       getCurrentStatus === 0 &&
         (await localforage.setItem("rounds", getNewRoundsValue));
+      this.playAudio();
       if (getNewRoundsValue === 0 && getCurrentStatus === 0) {
         console.log("Long Break starts");
       } else {
@@ -173,6 +175,10 @@ class Pomodoro {
     } catch (err) {
       console.log(err);
     }
+  }
+  playAudio(){
+    const audio = new Audio(audioFile)
+    audio.play()
   }
 }
 
