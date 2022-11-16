@@ -50,7 +50,7 @@ const Pomodoro = ({
     }
   };
   const getHandlerButton = (status: number) => {
-    if (status === 0) {
+    if (status === 0 && settings.status < 3) {
       return (
         <Button
           onClick={startPomodoroApp}
@@ -60,7 +60,7 @@ const Pomodoro = ({
           Start
         </Button>
       );
-    } else if (status === 1) {
+    } else if (status === 1 && settings.status < 3) {
       return (
         <Button
           onClick={pausePomodoroApp}
@@ -71,7 +71,7 @@ const Pomodoro = ({
           Pause
         </Button>
       );
-    } else {
+    } else if(status === 2 && settings.status < 3) {
       return (
         <Button
           onClick={startPomodoroApp}
@@ -82,6 +82,8 @@ const Pomodoro = ({
           Continue
         </Button>
       );
+    } else {
+      return;
     }
   };
   const startPomodoroApp = () => {
@@ -111,7 +113,7 @@ const Pomodoro = ({
         <CircleProgress settings={settings} />
       </Box>
       <Box textAlign={"center"} my={3}>
-        <Typography variant="h2" color="text.secondary">
+        <Typography fontWeight={"bold"} variant="h2" color="text.secondary">
           {getCurrentTime(settings.status)}
         </Typography>
         <Rating
@@ -143,14 +145,14 @@ const Pomodoro = ({
       </Box>
       <Box textAlign={"center"}>
         {getHandlerButton(pomodoroStatus)}
-        <Button
+        {settings.status < 3 && <Button
           variant="contained"
           color="warning"
           onClick={resetTimes}
           sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
         >
-          Reset Time
-        </Button>
+          Reset Round
+        </Button>}
       </Box>
       <Box textAlign={"center"}>
         <Button

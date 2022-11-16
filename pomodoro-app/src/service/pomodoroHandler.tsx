@@ -104,13 +104,25 @@ class Pomodoro {
       this.playAudio();
       let isFinalStage = (selectedRounds - (remainingRounds -1)) === selectedRounds;
       let isFinalStateButWasReset = (selectedRounds - remainingRounds) === selectedRounds;
-      if ((isFinalStage || isFinalStateButWasReset) && getCurrentStatus === 0) {
+      // after longbreak
+      if (getCurrentStatus === 2){
+        await localforage.setItem("status", 3);
+        this.updatePomodoroState((prevState: any) => ({
+          ...prevState,
+          status: 3,
+          percent: 100
+        }));
+        this.stopTimer(this.activeIntervalRef);
+      }
+      // after last round
+      else if ((isFinalStage || isFinalStateButWasReset) && getCurrentStatus === 0) {
         await localforage.setItem("status", 2);
         this.updatePomodoroState((prevState: any) => ({
           ...prevState,
           status: 2,
           rounds: prevState.rounds - 1
         }));
+      // work or break  
       } else {
         const getNewStatus = getCurrentStatus === 0 ? 1 : 0;
         await localforage.setItem("status", getNewStatus);
