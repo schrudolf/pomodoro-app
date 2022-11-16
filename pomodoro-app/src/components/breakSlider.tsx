@@ -45,7 +45,7 @@ const BreakSlider = (props: {
         Break time:
       </Typography>
       <SlideStyle
-        value={parseInt(props.settings.breakTime) / 60}
+        value={parseInt(props.settings.selectedBreakTime) / 60}
         step={5}
         min={5}
         max={30}

@@ -28,6 +28,7 @@ const LongBreakSlider = (props: {settings: AppSettings, setSettings: (prevState:
         props.setSettings((prevState: any) => ({
           ...prevState,
           longBreakTime: (value * 60).toString(),
+          selectedLongBreakTime: (value * 60).toString()
         }));
       }
     }
@@ -44,7 +45,7 @@ const LongBreakSlider = (props: {settings: AppSettings, setSettings: (prevState:
         Long break time:
       </Typography>
       <SlideStyle
-        value={parseInt(props.settings.longBreakTime) / 60}
+        value={parseInt(props.settings.selectedLongBreakTime) / 60}
         step={5}
         min={10}
         max={60}

@@ -25,6 +25,7 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
       props.setSettings((prevState: any) => ({
         ...prevState,
         workTime: (value * 60).toString(),
+        selectedWorkTime: (value * 60).toString(),
       }));
       localforage.setItem("workTime", (value * 60).toString(), (err) => {
         if(err) throw err;
@@ -43,7 +44,7 @@ const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any)
         Work time:
       </Typography>
       <SlideStyle
-        value={parseInt(props.settings.workTime) / 60}
+        value={parseInt(props.settings.selectedWorkTime) / 60}
         step={5}
         min={5}
         max={120}

@@ -12,14 +12,15 @@ function App() {
   const [isSettingsActive, setSettingStatus] = useState<Boolean>(false);
   const [settings, setSettings] = useState<AppSettings>({
     rounds: 0,
-    workTime: "0",
     breakTime: "300",
+    workTime: "0",
     longBreakTime: "1800",
-    selectedLongBreakTime: "1800",
     status: 0,
     persent: 0,
-    selectedBreakTime: "300",
     selectedRounds: 4,
+    selectedBreakTime: "300",
+    selectedWorkTime: "1500",
+    selectedLongBreakTime: "1800",
   });
 
   useEffect(() => {
@@ -39,20 +40,22 @@ function App() {
             );
             const statusValue = await localforage.getItem("status");
             const percentValue = await localforage.getItem("percent");
-            const selectedBreakTimeValue = await localforage.getItem("selectedBreakTime");
-            const selectedLongBreakTimeValue = await localforage.getItem("selectedLongBreakTime");
             const selectedRoundsValue = await localforage.getItem("selectedRounds");
+            const selectedBreakTimeValue = await localforage.getItem("selectedBreakTime");
+            const selectedWorkTimeValue = await localforage.getItem("selectedWorkTime");
+            const selectedLongBreakTimeValue = await localforage.getItem("selectedLongBreakTime");
             setSettings((prevState: AppSettings) => ({
               ...prevState,
               breakTime: breakTimeValue as string,
               longBreakTime: longBreakTimeValue as string,
-              selectedLongBreakTime: selectedLongBreakTimeValue as string,
               rounds: roundsValue as number,
               workTime: workTimeValue as string,
               status: statusValue as number,
               percent: percentValue as number,
+              selectedRounds: selectedRoundsValue as number,
               selectedBreakTime: selectedBreakTimeValue as string,
-              selectedRounds: selectedRoundsValue as number
+              selectedWorkTime: selectedWorkTimeValue as string,
+              selectedLongBreakTime: selectedLongBreakTimeValue as string,
             }));
             setIsAppReady(true);
           } catch (err) {
