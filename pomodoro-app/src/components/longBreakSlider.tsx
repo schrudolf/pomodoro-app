@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import SlideStyle from "./slidesStyle";
 import { AppSettings } from "../models/settings";
 
-const marks = (function () {
+const marks = (() => {
   let getWorkTimers = [];
   for (let i = 1; i <= 12; i++) {
     if (i % 2 === 0) {

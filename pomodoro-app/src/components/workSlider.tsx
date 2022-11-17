@@ -6,7 +6,7 @@ import SlideStyle from "./slidesStyle";
 import localforage from "localforage";
 import { AppSettings } from "../models/settings";
 
-const marks = (function () {
+const marks = (() => {
   let getWorkTimers = [];
   for (let i = 1; i <= 24; i++) {
     if (i % 5 === 0 || i === 1 || i === 24) {
