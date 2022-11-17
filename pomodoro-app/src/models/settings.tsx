@@ -4,7 +4,7 @@ export interface AppSettings {
   breakTime: string;
   longBreakTime: string;
   status: number;
-  persent: number;
+  percent: number;
   selectedRounds: number;
   selectedBreakTime: string;
   selectedWorkTime: string;

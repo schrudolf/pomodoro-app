@@ -24,12 +24,13 @@ const BreakSlider = (props: {
   const updateBreakTime = async (value: number | number[]) => {
     try {
       if (typeof value === "number") {
-        await localforage.setItem("breakTime", (value * 60).toString());
-        await localforage.setItem("selectedBreakTime", (value * 60).toString());
+        const newTime = (value * 60).toString();
+        await localforage.setItem("breakTime", newTime);
+        await localforage.setItem("selectedBreakTime", newTime);
         props.setSettings((prevState: AppSettings) => ({
           ...prevState,
-          breakTime: (value * 60).toString(),
-          selectedBreakTime: (value * 60).toString(),
+          breakTime: newTime,
+          selectedBreakTime: newTime,
         }));
       }
     } catch (err) {

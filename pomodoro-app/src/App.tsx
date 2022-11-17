@@ -16,7 +16,7 @@ function App() {
     workTime: "0",
     longBreakTime: "1800",
     status: 0,
-    persent: 0,
+    percent: 0,
     selectedRounds: 4,
     selectedBreakTime: "300",
     selectedWorkTime: "1500",

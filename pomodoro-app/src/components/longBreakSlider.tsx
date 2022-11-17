@@ -26,15 +26,13 @@ const LongBreakSlider = (props: {
   const updateLongBreakTime = async (value: number | number[]) => {
     try {
       if (typeof value === "number") {
-        await localforage.setItem("longBreakTime", (value * 60).toString());
-        await localforage.setItem(
-          "selectedLongBreakTime",
-          (value * 60).toString()
-        );
+        const newTime = (value * 60).toString();
+        await localforage.setItem("longBreakTime", newTime);
+        await localforage.setItem("selectedLongBreakTime", newTime);
         props.setSettings((prevState: AppSettings) => ({
           ...prevState,
-          longBreakTime: (value * 60).toString(),
-          selectedLongBreakTime: (value * 60).toString(),
+          longBreakTime: newTime,
+          selectedLongBreakTime: newTime,
         }));
       }
     } catch (err) {

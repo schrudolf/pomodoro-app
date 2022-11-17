@@ -7,6 +7,8 @@ import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import WeekendIcon from "@mui/icons-material/Weekend";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
+import { AppSettings } from "../models/settings";
+
 function getCurrentIcon(stateValue: number): JSX.Element {
   if (stateValue === 0) {
     return <FitnessCenterIcon fontSize="large" />;
@@ -73,7 +75,7 @@ function CircularProgressWithLabel(props: any): JSX.Element {
   );
 }
 
-const CircleProgress = (props: { settings: any }) => {
+const CircleProgress = (props: { settings: AppSettings }) => {
   return (
     <CircularProgressWithLabel
       value={props.settings.percent}
