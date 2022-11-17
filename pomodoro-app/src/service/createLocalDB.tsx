@@ -1,15 +1,16 @@
 import localforage from "localforage";
-
-type Rounds = number;
-type WorkTime = string;
-type BreakTime = string;
-type LongBreakTime = string;
-type Status = number;
-type Percent = number;
-type SelectedWorkTime = string;
-type SelectedRounds = number;
-type SelectedBreakTime = string;
-type SelectedLongBreakTime = string;
+import {
+  BreakTime,
+  LongBreakTime,
+  Percent,
+  Rounds,
+  SelectedBreakTime,
+  SelectedLongBreakTime,
+  SelectedRounds,
+  SelectedWorkTime,
+  Status,
+  WorkTime,
+} from "../models/localDB";
 
 const createLocalDB = async () => {
   const rounds: Rounds = 0;
@@ -22,16 +23,16 @@ const createLocalDB = async () => {
   const selectedRounds: SelectedRounds = 4;
   const selectedBreakTime: SelectedBreakTime = "300";
   const selectedLongBreakTime: SelectedLongBreakTime = "1800";
-  await localforage.setItem("rounds", rounds)
-  await localforage.setItem("workTime", workTime)
-  await localforage.setItem("breakTime", breakTime)
-  await localforage.setItem("longBreakTime", longBreakTime)
-  await localforage.setItem("status", status)
-  await localforage.setItem("percent", percent)
-  await localforage.setItem("selectedWorkTime", selectedWorkTime)
-  await localforage.setItem("selectedRounds", selectedRounds)
-  await localforage.setItem("selectedBreakTime", selectedBreakTime)
-  await localforage.setItem("selectedLongBreakTime", selectedLongBreakTime)
+  await localforage.setItem("rounds", rounds);
+  await localforage.setItem("workTime", workTime);
+  await localforage.setItem("breakTime", breakTime);
+  await localforage.setItem("longBreakTime", longBreakTime);
+  await localforage.setItem("status", status);
+  await localforage.setItem("percent", percent);
+  await localforage.setItem("selectedWorkTime", selectedWorkTime);
+  await localforage.setItem("selectedRounds", selectedRounds);
+  await localforage.setItem("selectedBreakTime", selectedBreakTime);
+  await localforage.setItem("selectedLongBreakTime", selectedLongBreakTime);
 };
 
 export default createLocalDB;
