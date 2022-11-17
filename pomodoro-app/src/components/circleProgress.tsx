@@ -7,9 +7,9 @@ import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import WeekendIcon from "@mui/icons-material/Weekend";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
-function getCurrentIcon(stateValue: number) {
+function getCurrentIcon(stateValue: number): JSX.Element {
   if (stateValue === 0) {
-    return <FitnessCenterIcon fontSize="large" />
+    return <FitnessCenterIcon fontSize="large" />;
   } else if (stateValue === 1) {
     return <SelfImprovementIcon fontSize="large" />;
   } else if (stateValue === 2) {
@@ -30,7 +30,7 @@ function getCurrentState(stateValue: number): string {
   }
 }
 
-function CircularProgressWithLabel(props: any) {
+function CircularProgressWithLabel(props: any): JSX.Element {
   return (
     <Box sx={{ position: "relative", display: "inline-flex" }}>
       <CircularProgress
@@ -53,17 +53,20 @@ function CircularProgressWithLabel(props: any) {
         }}
       >
         <Typography variant="h5" mt={3} fontWeight={"bold"} maxWidth={"60%"}>
-              {getCurrentState(props.status)}
+          {getCurrentState(props.status)}
           <div>
-            <Typography sx={{marginTop: 3}} variant="h2" fontWeight={"bold"} color="text.secondary">
-              {props.status < 3 && (
-                `${Math.round(props.value)}%`
-              )}
+            <Typography
+              sx={{ marginTop: 3 }}
+              variant="h2"
+              fontWeight={"bold"}
+              color="text.secondary"
+            >
+              {props.status < 3 && `${Math.round(props.value)}%`}
             </Typography>
           </div>
-            <p style={{ marginBottom: 5, padding: 0 }}>
-                {getCurrentIcon(props.status)}
-            </p>
+          <p style={{ marginBottom: 5, padding: 0 }}>
+            {getCurrentIcon(props.status)}
+          </p>
         </Typography>
       </Box>
     </Box>

@@ -19,21 +19,26 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const LongBreakSlider = (props: {settings: AppSettings, setSettings: (prevState: any) => any }) => {
+const LongBreakSlider = (props: {
+  settings: AppSettings;
+  setSettings: React.Dispatch<React.SetStateAction<AppSettings>>;
+}) => {
   const updateLongBreakTime = async (value: number | number[]) => {
-    try{
-      if(typeof value === "number"){
+    try {
+      if (typeof value === "number") {
         await localforage.setItem("longBreakTime", (value * 60).toString());
-        await localforage.setItem("selectedLongBreakTime", (value * 60).toString());
-        props.setSettings((prevState: any) => ({
+        await localforage.setItem(
+          "selectedLongBreakTime",
+          (value * 60).toString()
+        );
+        props.setSettings((prevState: AppSettings) => ({
           ...prevState,
           longBreakTime: (value * 60).toString(),
-          selectedLongBreakTime: (value * 60).toString()
+          selectedLongBreakTime: (value * 60).toString(),
         }));
       }
-    }
-    catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   };
   return (

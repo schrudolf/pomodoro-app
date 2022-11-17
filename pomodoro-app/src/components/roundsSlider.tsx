@@ -19,16 +19,16 @@ const marks = (function () {
 
 const RoundsSlider = (props: {
   settings: AppSettings;
-  setSettings: (prevState: any) => any;
+  setSettings: React.Dispatch<React.SetStateAction<AppSettings>>;
 }) => {
   const updateRounds = async (value: number | number[]) => {
     try {
       await localforage.setItem("selectedRounds", value);
       await localforage.setItem("rounds", value);
-      props.setSettings((prevState: any) => ({
+      props.setSettings((prevState: AppSettings) => ({
         ...prevState,
-        selectedRounds: value,
-        rounds: value
+        selectedRounds: value as number,
+        rounds: value as number,
       }));
     } catch (err) {
       console.log(err);

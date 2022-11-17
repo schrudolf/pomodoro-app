@@ -19,14 +19,14 @@ const marks = (function () {
 
 const BreakSlider = (props: {
   settings: AppSettings;
-  setSettings: (prevState: any) => any;
+  setSettings: React.Dispatch<React.SetStateAction<AppSettings>>;
 }) => {
   const updateBreakTime = async (value: number | number[]) => {
     try {
       if (typeof value === "number") {
         await localforage.setItem("breakTime", (value * 60).toString());
         await localforage.setItem("selectedBreakTime", (value * 60).toString());
-        props.setSettings((prevState: any) => ({
+        props.setSettings((prevState: AppSettings) => ({
           ...prevState,
           breakTime: (value * 60).toString(),
           selectedBreakTime: (value * 60).toString(),

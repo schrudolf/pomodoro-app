@@ -19,20 +19,27 @@ const marks = (function () {
   return getWorkTimers;
 })();
 
-const WorkSlider = (props: {settings: AppSettings, setSettings: (prevState: any) => any }) => {
+const WorkSlider = (props: {
+  settings: AppSettings;
+  setSettings: React.Dispatch<React.SetStateAction<AppSettings>>;
+}) => {
   const updateWorkTime = (value: number | number[]) => {
-    if(typeof value === "number"){
-      props.setSettings((prevState: any) => ({
+    if (typeof value === "number") {
+      props.setSettings((prevState: AppSettings) => ({
         ...prevState,
         workTime: (value * 60).toString(),
         selectedWorkTime: (value * 60).toString(),
       }));
       localforage.setItem("workTime", (value * 60).toString(), (err) => {
-        if(err) throw err;
-      })
-      localforage.setItem("selectedWorkTime", (value * 60).toString(), (err) => {
-        if(err) throw err;
-      })
+        if (err) throw err;
+      });
+      localforage.setItem(
+        "selectedWorkTime",
+        (value * 60).toString(),
+        (err) => {
+          if (err) throw err;
+        }
+      );
     }
   };
   return (

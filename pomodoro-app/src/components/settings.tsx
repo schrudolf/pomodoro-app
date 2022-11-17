@@ -11,9 +11,9 @@ import LongBreakSlider from "./longBreakSlider";
 import { AppSettings } from "../models/settings";
 
 interface settingsProp {
-  setSettingStatus: (value: Boolean) => void;
+  setSettingStatus: React.Dispatch<React.SetStateAction<Boolean>>;
   settings: AppSettings,
-  setSettings: (value: AppSettings) => void;
+  setSettings: React.Dispatch<React.SetStateAction<AppSettings>>;
 }
 
 function Settings({ setSettingStatus, settings ,setSettings}: settingsProp) {

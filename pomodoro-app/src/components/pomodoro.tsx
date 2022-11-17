@@ -17,9 +17,9 @@ import WeekendIcon from "@mui/icons-material/Weekend";
 import { AppSettings } from "../models/settings";
 
 interface pomodoroProps {
-  setSettingStatus: (value: Boolean) => void;
+  setSettingStatus: React.Dispatch<React.SetStateAction<Boolean>>;
   settings: AppSettings;
-  setSettings: (value: any) => void;
+  setSettings: React.Dispatch<React.SetStateAction<AppSettings>>;
 }
 
 const Pomodoro = ({
@@ -30,7 +30,7 @@ const Pomodoro = ({
   const [pomodoroStatus, setPomodoroStatus] = useState(0);
   const intervalref = useRef<number | null>(null);
 
-  const parseCurrentTime = (timeValue: string) => {
+  const parseCurrentTime = (timeValue: string): string => {
     const getTimeInNumber = parseInt(timeValue);
     const getSeconds = getTimeInNumber % 60;
     const getMinutes = Math.floor(getTimeInNumber / 60);
@@ -71,7 +71,7 @@ const Pomodoro = ({
           Pause
         </Button>
       );
-    } else if(status === 2 && settings.status < 3) {
+    } else if (status === 2 && settings.status < 3) {
       return (
         <Button
           onClick={startPomodoroApp}
@@ -86,23 +86,23 @@ const Pomodoro = ({
       return;
     }
   };
-  const startPomodoroApp = () => {
+  const startPomodoroApp = (): void => {
     setPomodoroStatus(1);
     pomodoroHandler.startTimer(intervalref, setSettings);
   };
-  const pausePomodoroApp = () => {
+  const pausePomodoroApp = (): void => {
     setPomodoroStatus(2);
     pomodoroHandler.stopTimer(intervalref);
   };
-  const resetTimes = () => {
+  const resetTimes = (): void => {
     setPomodoroStatus(0);
     pomodoroHandler.resetTimes(setSettings, intervalref);
   };
-  const fullReset = async () => {
+  const fullReset = (): void => {
     setPomodoroStatus(0);
     pomodoroHandler.fullReset(setSettings, intervalref);
   };
-  const openSettings = () => {
+  const openSettings = (): void => {
     pausePomodoroApp();
     fullReset();
     setSettingStatus(true);
@@ -138,21 +138,24 @@ const Pomodoro = ({
           </Grid>
           <Grid textAlign={"left"} item xs={4}>
             <Typography fontWeight={600}>
-              {(parseInt(settings.selectedLongBreakTime) / 60).toString() + ":00"}
+              {(parseInt(settings.selectedLongBreakTime) / 60).toString() +
+                ":00"}
             </Typography>
           </Grid>
         </Grid>
       </Box>
       <Box textAlign={"center"}>
         {getHandlerButton(pomodoroStatus)}
-        {settings.status < 3 && <Button
-          variant="contained"
-          color="warning"
-          onClick={resetTimes}
-          sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
-        >
-          Reset Round
-        </Button>}
+        {settings.status < 3 && (
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={resetTimes}
+            sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
+          >
+            Reset Round
+          </Button>
+        )}
       </Box>
       <Box textAlign={"center"}>
         <Button
