@@ -23,23 +23,20 @@ const WorkSlider = (props: {
   settings: AppSettings;
   setSettings: React.Dispatch<React.SetStateAction<AppSettings>>;
 }) => {
-  const updateWorkTime = (value: number | number[]) => {
-    if (typeof value === "number") {
-      props.setSettings((prevState: AppSettings) => ({
-        ...prevState,
-        workTime: (value * 60).toString(),
-        selectedWorkTime: (value * 60).toString(),
-      }));
-      localforage.setItem("workTime", (value * 60).toString(), (err) => {
-        if (err) throw err;
-      });
-      localforage.setItem(
-        "selectedWorkTime",
-        (value * 60).toString(),
-        (err) => {
-          if (err) throw err;
-        }
-      );
+  const updateWorkTime = async (value: number | number[]) => {
+    try {
+      if (typeof value === "number") {
+        const newTime = (value * 60).toString();
+        await localforage.setItem("workTime", newTime);
+        await localforage.setItem("selectedWorkTime", newTime);
+        props.setSettings((prevState: AppSettings) => ({
+          ...prevState,
+          workTime: newTime,
+          selectedWorkTime: newTime,
+        }));
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
   return (
