@@ -1,6 +1,6 @@
 html {
     border: 1px solid rgb(143, 151, 140);
-    height: 728px;
+    height: 768px;
     background-color: #2b3038;
     overflow: hidden;
 }
@@ -140,6 +140,19 @@ html {
 .informationIcon {
     color: white !important;
     margin-right: 5px !important;
+}
+
+.footerMain {
+    margin: auto;
+    padding: 0.5rem;
+}
+
+.footerTitle {
+    color: white!important;
+}
+
+.footerLink{
+    color: white!important;
 }
 
 /* Settings */

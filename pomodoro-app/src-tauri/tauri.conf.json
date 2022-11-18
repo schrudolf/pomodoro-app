@@ -7,8 +7,8 @@
     "distDir": "../build"
   },
   "package": {
-    "productName": "pomodoro-app",
-    "version": "0.1.0"
+    "productName": "MeTime",
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -16,8 +16,8 @@
     },
     "bundle": {
       "active": true,
+      "identifier": "MeTime",
       "category": "DeveloperTool",
-      "copyright": "",
       "deb": {
         "depends": []
       },
@@ -29,22 +29,17 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "",
-      "longDescription": "",
       "macOS": {
         "entitlements": null,
-        "exceptionDomain": "",
         "frameworks": [],
         "providerShortName": null,
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
+        "digestAlgorithm": "sha256"
       }
     },
     "security": {
@@ -56,7 +51,7 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 730,
+        "height": 770,
         "resizable": false,
         "title": "MeTime",
         "width": 450,

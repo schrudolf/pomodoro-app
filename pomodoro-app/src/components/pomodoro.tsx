@@ -16,6 +16,7 @@ import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import WeekendIcon from "@mui/icons-material/Weekend";
 
 import { AppSettings } from "../models/settings";
+import Footer from "./footer";
 
 interface pomodoroProps {
   setSettingStatus: React.Dispatch<React.SetStateAction<Boolean>>;
@@ -186,6 +187,7 @@ const Pomodoro = ({
           </Typography>
         </Link>
       </Box>
+      <Footer />
     </Container>
   );
 };
