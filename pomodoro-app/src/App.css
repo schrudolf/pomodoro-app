@@ -19,18 +19,30 @@ html {
     top: 0;
     left: 0;
     right: 0;
-  }
-  .titlebar-button {
+}
+
+.titlebar-button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 30px;
     height: 30px;
-  }
-  .titlebar-button:hover {
+}
+
+.titlebar-button:hover {
     background: #c2d1cb;
-  }
-/* own titlebar end */  
+}
+.titlebarTitle{
+    color: #fffcfca4;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    top: -9px;
+    left: -250px;
+    right: 0;
+    font-weight: 600;
+}
+/* own titlebar end */
 
 .circleProgress {
     box-shadow: inset 0px 0px 0px 25px rgba(0, 0, 0, 0.514);
@@ -147,6 +159,6 @@ html {
 .saveSettingsButton {
     width: 100%;
     font-weight: 600 !important;
-    background-color: #2CE69B!important;
+    background-color: #2CE69B !important;
     color: #22272E !important;
 }
