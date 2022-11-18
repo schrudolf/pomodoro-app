@@ -19,7 +19,7 @@ function Settings({ setSettingStatus, settings, setSettings }: settingsProp) {
     setSettingStatus(false);
   };
   return (
-    <Box pt={2} className="settingsBox">
+    <Box pt={5} className="settingsBox">
       <RoundsSlider settings={settings} setSettings={setSettings} />
       <WorkSlider settings={settings} setSettings={setSettings} />
       <BreakSlider settings={settings} setSettings={setSettings} />

@@ -34,7 +34,7 @@ function getCurrentState(stateValue: number): string {
 
 function CircularProgressWithLabel(props: any): JSX.Element {
   return (
-    <Box sx={{ position: "relative", display: "inline-flex" }}>
+    <Box sx={{ position: "relative", display: "inline-flex", marginTop: "1.5rem" }}>
       <CircularProgress
         color="primary"
         size={300}
