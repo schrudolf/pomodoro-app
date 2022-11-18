@@ -41,10 +41,7 @@ const WorkSlider = (props: {
   };
   return (
     <div>
-      <Typography
-        gutterBottom
-        className="settingsTitle"
-      >
+      <Typography gutterBottom className="settingsTitle">
         Work time:
       </Typography>
       <SlideStyle

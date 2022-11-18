@@ -12,11 +12,11 @@ import { AppSettings } from "../models/settings";
 
 interface settingsProp {
   setSettingStatus: React.Dispatch<React.SetStateAction<Boolean>>;
-  settings: AppSettings,
+  settings: AppSettings;
   setSettings: React.Dispatch<React.SetStateAction<AppSettings>>;
 }
 
-function Settings({ setSettingStatus, settings ,setSettings}: settingsProp) {
+function Settings({ setSettingStatus, settings, setSettings }: settingsProp) {
   const saveSettings = () => {
     setSettingStatus(false);
   };
@@ -31,7 +31,7 @@ function Settings({ setSettingStatus, settings ,setSettings}: settingsProp) {
         Settings
       </Typography>
       <RoundsSlider settings={settings} setSettings={setSettings} />
-      <WorkSlider settings={settings} setSettings={setSettings}/>
+      <WorkSlider settings={settings} setSettings={setSettings} />
       <BreakSlider settings={settings} setSettings={setSettings} />
       <LongBreakSlider settings={settings} setSettings={setSettings} />
       <Button

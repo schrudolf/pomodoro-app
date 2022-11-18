@@ -42,9 +42,7 @@ function CircularProgressWithLabel(props: any): JSX.Element {
         variant="determinate"
         {...props}
       />
-      <Box
-        className="circleProgressInside"
-      >
+      <Box className="circleProgressInside">
         <Typography variant="h5" mt={3} fontWeight={"bold"} maxWidth={"60%"}>
           {getCurrentState(props.status)}
           <div>

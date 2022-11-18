@@ -41,10 +41,7 @@ const LongBreakSlider = (props: {
   };
   return (
     <div>
-      <Typography
-        gutterBottom
-        className="settingsTitle"
-      >
+      <Typography gutterBottom className="settingsTitle">
         Long break time:
       </Typography>
       <SlideStyle

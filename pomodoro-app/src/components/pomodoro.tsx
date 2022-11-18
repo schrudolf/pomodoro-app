@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
+import StarIcon from "@mui/icons-material/Star";
 
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import WeekendIcon from "@mui/icons-material/Weekend";
@@ -120,24 +121,28 @@ const Pomodoro = ({
           name="read-only"
           value={settings.selectedRounds - settings.rounds}
           max={settings.selectedRounds}
+          sx={{ fontSize: "2rem" }}
+          emptyIcon={
+            <StarIcon
+              style={{ opacity: 0.5, color: "white", fontSize: "2rem" }}
+            />
+          }
           readOnly
         />
-        <Grid textAlign={"center"} container sx={{ color: "text.primary" }}>
-          <Grid textAlign={"right"} item xs={4}>
+        <Grid container>
+          <Grid textAlign={"right"} item xs={3}>
             <SelfImprovementIcon className="informationIcon" />
           </Grid>
-          <Grid item xs={1}>
-            <Typography fontWeight={600}>
+          <Grid textAlign={"left"} item xs={3}>
+            <Typography className="selectedTimers">
               {(parseInt(settings.selectedBreakTime) / 60).toString() + ":00"}
             </Typography>
           </Grid>
-          <Grid textAlign={"right"} item xs={2}>
-            <WeekendIcon
-              className="informationIcon"
-            />
+          <Grid textAlign={"right"} item xs={3}>
+            <WeekendIcon className="informationIcon" />
           </Grid>
-          <Grid textAlign={"left"} item xs={4}>
-            <Typography fontWeight={600}>
+          <Grid textAlign={"left"} item xs={3}>
+            <Typography className="selectedTimers">
               {(parseInt(settings.selectedLongBreakTime) / 60).toString() +
                 ":00"}
             </Typography>
@@ -175,9 +180,7 @@ const Pomodoro = ({
           title={"Settings"}
           className="settingsLink"
         >
-          <SettingsIcon
-          className="settingsLinkIcon"
-          />
+          <SettingsIcon className="settingsLinkIcon" />
           <Typography fontSize={20} display={"inline"} alignContent={"center"}>
             Settings
           </Typography>

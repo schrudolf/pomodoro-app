@@ -36,10 +36,7 @@ const RoundsSlider = (props: {
   };
   return (
     <div>
-      <Typography
-        gutterBottom
-        className="settingsTitle"
-      >
+      <Typography gutterBottom className="settingsTitle">
         Rounds:
       </Typography>
       <SlideStyle

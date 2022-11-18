@@ -40,10 +40,18 @@ function App() {
             );
             const statusValue = await localforage.getItem("status");
             const percentValue = await localforage.getItem("percent");
-            const selectedRoundsValue = await localforage.getItem("selectedRounds");
-            const selectedBreakTimeValue = await localforage.getItem("selectedBreakTime");
-            const selectedWorkTimeValue = await localforage.getItem("selectedWorkTime");
-            const selectedLongBreakTimeValue = await localforage.getItem("selectedLongBreakTime");
+            const selectedRoundsValue = await localforage.getItem(
+              "selectedRounds"
+            );
+            const selectedBreakTimeValue = await localforage.getItem(
+              "selectedBreakTime"
+            );
+            const selectedWorkTimeValue = await localforage.getItem(
+              "selectedWorkTime"
+            );
+            const selectedLongBreakTimeValue = await localforage.getItem(
+              "selectedLongBreakTime"
+            );
             setSettings((prevState: AppSettings) => ({
               ...prevState,
               breakTime: breakTimeValue as string,
