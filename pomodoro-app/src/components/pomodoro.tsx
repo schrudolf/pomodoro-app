@@ -55,7 +55,7 @@ const Pomodoro = ({
         <Button
           onClick={startPomodoroApp}
           variant="contained"
-          sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
+          className="startButton"
         >
           Start
         </Button>
@@ -66,7 +66,7 @@ const Pomodoro = ({
           onClick={pausePomodoroApp}
           variant="contained"
           color="error"
-          sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
+          className="pauseButton"
         >
           Pause
         </Button>
@@ -77,7 +77,7 @@ const Pomodoro = ({
           onClick={startPomodoroApp}
           variant="contained"
           color="success"
-          sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
+          className="continueButton"
         >
           Continue
         </Button>
@@ -113,7 +113,7 @@ const Pomodoro = ({
         <CircleProgress settings={settings} />
       </Box>
       <Box textAlign={"center"} my={3}>
-        <Typography fontWeight={"bold"} variant="h2" color="text.secondary">
+        <Typography fontWeight={"bold"} variant="h2" className="currentTime">
           {getCurrentTime(settings.status)}
         </Typography>
         <Rating
@@ -124,7 +124,7 @@ const Pomodoro = ({
         />
         <Grid textAlign={"center"} container sx={{ color: "text.primary" }}>
           <Grid textAlign={"right"} item xs={4}>
-            <SelfImprovementIcon sx={{ color: "white", marginRight: "4px" }} />
+            <SelfImprovementIcon className="informationIcon" />
           </Grid>
           <Grid item xs={1}>
             <Typography fontWeight={600}>
@@ -133,7 +133,7 @@ const Pomodoro = ({
           </Grid>
           <Grid textAlign={"right"} item xs={2}>
             <WeekendIcon
-              sx={{ fontSize: "1.5rem", color: "white", marginRight: "4px" }}
+              className="informationIcon"
             />
           </Grid>
           <Grid textAlign={"left"} item xs={4}>
@@ -151,7 +151,7 @@ const Pomodoro = ({
             variant="contained"
             color="warning"
             onClick={resetTimes}
-            sx={{ width: "40%", margin: "0.3rem", fontWeight: 600 }}
+            className="resetButton"
           >
             Reset Round
           </Button>
@@ -162,7 +162,7 @@ const Pomodoro = ({
           variant="contained"
           color="error"
           onClick={fullReset}
-          sx={{ width: "83%", margin: "0.3rem", fontWeight: 600 }}
+          className="fullResetButton"
         >
           Full Reset
         </Button>
@@ -173,10 +173,10 @@ const Pomodoro = ({
           variant="body2"
           onClick={openSettings}
           title={"Settings"}
-          sx={{ fontSize: "3rem", color: "white", textDecoration: "none" }}
+          className="settingsLink"
         >
           <SettingsIcon
-            sx={{ fontSize: "1rem", color: "white", marginRight: "4px" }}
+          className="settingsLinkIcon"
           />
           <Typography fontSize={20} display={"inline"} alignContent={"center"}>
             Settings

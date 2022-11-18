@@ -42,8 +42,8 @@ const LongBreakSlider = (props: {
   return (
     <div>
       <Typography
-        sx={{ margin: "1rem 0 2rem -2.5rem", fontWeight: 600, width: "100%" }}
         gutterBottom
+        className="settingsTitle"
       >
         Long break time:
       </Typography>

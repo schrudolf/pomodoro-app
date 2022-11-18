@@ -21,7 +21,7 @@ function Settings({ setSettingStatus, settings ,setSettings}: settingsProp) {
     setSettingStatus(false);
   };
   return (
-    <Box sx={{ width: "75%", margin: "auto" }}>
+    <Box className="settingsBox">
       <Typography
         fontWeight={"bold"}
         textAlign={"center"}
@@ -35,10 +35,10 @@ function Settings({ setSettingStatus, settings ,setSettings}: settingsProp) {
       <BreakSlider settings={settings} setSettings={setSettings} />
       <LongBreakSlider settings={settings} setSettings={setSettings} />
       <Button
-        sx={{ width: "100%", fontWeight: 600 }}
         onClick={saveSettings}
         color="inherit"
         variant="contained"
+        className="saveSettingsButton"
       >
         Save settings
       </Button>

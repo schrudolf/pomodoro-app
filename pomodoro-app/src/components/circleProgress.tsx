@@ -38,30 +38,20 @@ function CircularProgressWithLabel(props: any): JSX.Element {
       <CircularProgress
         color="primary"
         size={300}
-        sx={{ boxShadow: "inset 0px 0px 0px 25px black", borderRadius: "100%" }}
+        className="circleProgress"
         variant="determinate"
         {...props}
       />
       <Box
-        sx={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        className="circleProgressInside"
       >
         <Typography variant="h5" mt={3} fontWeight={"bold"} maxWidth={"60%"}>
           {getCurrentState(props.status)}
           <div>
             <Typography
-              sx={{ marginTop: 3 }}
               variant="h2"
               fontWeight={"bold"}
-              color="text.secondary"
+              className="progressCirclePercent"
             >
               {props.status < 3 && `${Math.round(props.value)}%`}
             </Typography>

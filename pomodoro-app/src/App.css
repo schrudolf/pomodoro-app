@@ -1,4 +1,100 @@
 .app {
-    background-color: rgb(37, 187, 242);
+    background-color: #22272E;
 }
 
+.circleProgress {
+    box-shadow: inset 0px 0px 0px 25px rgba(0, 0, 0, 0.514);
+    border-radius: 100%;
+    color: #2CE69B!important;
+}
+
+.circleProgressInside {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+}
+
+.progressCirclePercent {
+    margin-top: 15px!important;
+    color: #2CE69B;
+}
+
+.currentTime {
+    color: #00db84!important;;
+}
+
+.startButton {
+    background-color: #00db84!important;
+}
+.startButton:hover {
+    background-color: #06c377!important;
+}
+.pauseButton{
+    background-color: #cc4e5c!important;
+}
+.pauseButton:hover{
+    background-color: #ad3b48!important;
+}
+.continueButton {
+    background-color: #00db84!important;
+}
+.continueButton:hover {
+    background-color: #06c377!important;
+}
+.resetButton {
+    background-color: #efa723!important;
+}
+.resetButton:hover {
+    background-color: #d79720!important;
+}
+.startButton, .pauseButton, .continueButton, .resetButton {
+    color: #22272ead!important;
+    width: 40%;
+    margin: 0.3rem!important;
+    font-weight: 600!important;
+}
+
+.fullResetButton {
+    color: #22272ead!important;
+    width: 83%;
+    margin: 0.3rem!important;
+    font-weight: 600!important;
+}
+
+.settingsLink {
+    font-size: 3rem!important;
+    color: white!important;
+    text-decoration: none!important;
+}
+
+.settingsLinkIcon {
+    font-size: 1rem!important;
+    color: white!important;
+    margin-right: 4px!important;
+}
+
+.informationIcon {
+    color: white!important;
+    margin-right: 5px!important;
+}
+
+/* Settings */
+.settingsBox {
+    width: 75%!important;
+    margin: auto!important;
+}
+.settingsTitle {
+    margin: 1rem 0 2rem -2.5rem!important;
+    font-weight: 600!important;
+}
+
+.saveSettingsButton {
+    width: 100%;
+    font-weight: 600!important;
+}

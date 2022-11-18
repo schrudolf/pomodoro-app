@@ -37,8 +37,8 @@ const RoundsSlider = (props: {
   return (
     <div>
       <Typography
-        sx={{ margin: "1rem 0 2rem -2.5rem", fontWeight: 600 }}
         gutterBottom
+        className="settingsTitle"
       >
         Rounds:
       </Typography>
