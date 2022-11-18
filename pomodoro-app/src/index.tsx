@@ -2,6 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
+import { appWindow } from '@tauri-apps/api/window'
+document
+.getElementById('titlebar-minimize')!
+  .addEventListener('click', () => appWindow.minimize())
+document
+  .getElementById('titlebar-close')!
+  .addEventListener('click', () => appWindow.close())
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

@@ -59,7 +59,8 @@
         "height": 730,
         "resizable": false,
         "title": "MeTime",
-        "width": 450
+        "width": 450,
+        "decorations": false
       }
     ]
   }
