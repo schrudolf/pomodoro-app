@@ -27,31 +27,31 @@ const SlideStyle = styled(Slider)(({ theme }) => ({
     fontWeight: "normal",
     top: -6,
     backgroundColor: "unset",
-    color: theme.palette.text.primary,
     "&:before": {
       display: "none",
     },
     "& *": {
       background: "transparent",
-      color: "white",
-      fontSize: "1rem",
+      color: "lightgreen",
+      fontSize: "0.8rem",
+      fontWeight: "600"
     },
-  },
-  "& .MuiSlider-track": {
-    border: "none",
   },
   "& .MuiSlider-rail": {
     opacity: 0.5,
-    backgroundColor: "white",
+    backgroundColor: "#cc4e5c",
   },
   "& .MuiSlider-mark": {
-    backgroundColor: "black",
-    height: 8,
-    width: 1,
+    backgroundColor: "#cc4e5c",
+    height: 10,
+    width: 2,
     "&.MuiSlider-markActive": {
       opacity: 1,
       backgroundColor: "currentColor",
     },
+  },
+  "& .MuiSlider-markLabel": {
+    color: "#cc4e5c",
   },
 }));
 

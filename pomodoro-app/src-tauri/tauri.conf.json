@@ -56,9 +56,9 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 700,
+        "height": 730,
         "resizable": false,
-        "title": "MeTime Pomodoro",
+        "title": "MeTime",
         "width": 450
       }
     ]

@@ -21,15 +21,7 @@ function Settings({ setSettingStatus, settings, setSettings }: settingsProp) {
     setSettingStatus(false);
   };
   return (
-    <Box className="settingsBox">
-      <Typography
-        fontWeight={"bold"}
-        textAlign={"center"}
-        variant="h4"
-        component="h2"
-      >
-        Settings
-      </Typography>
+    <Box pt={2} className="settingsBox">
       <RoundsSlider settings={settings} setSettings={setSettings} />
       <WorkSlider settings={settings} setSettings={setSettings} />
       <BreakSlider settings={settings} setSettings={setSettings} />

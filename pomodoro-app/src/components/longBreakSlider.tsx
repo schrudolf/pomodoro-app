@@ -42,7 +42,7 @@ const LongBreakSlider = (props: {
   return (
     <div>
       <Typography gutterBottom className="settingsTitle">
-        Long break time:
+        Long break time
       </Typography>
       <SlideStyle
         value={parseInt(props.settings.selectedLongBreakTime) / 60}

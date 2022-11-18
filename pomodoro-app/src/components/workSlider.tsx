@@ -42,7 +42,7 @@ const WorkSlider = (props: {
   return (
     <div>
       <Typography gutterBottom className="settingsTitle">
-        Work time:
+        Work time
       </Typography>
       <SlideStyle
         value={parseInt(props.settings.selectedWorkTime) / 60}

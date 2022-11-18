@@ -124,7 +124,7 @@ const Pomodoro = ({
           sx={{ fontSize: "2rem" }}
           emptyIcon={
             <StarIcon
-              style={{ opacity: 0.5, color: "white", fontSize: "2rem" }}
+              style={{ opacity: 0.5, color: "white", fontSize: "2rem", marginBottom: "1rem" }}
             />
           }
           readOnly

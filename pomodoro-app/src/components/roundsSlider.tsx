@@ -37,7 +37,7 @@ const RoundsSlider = (props: {
   return (
     <div>
       <Typography gutterBottom className="settingsTitle">
-        Rounds:
+        Rounds
       </Typography>
       <SlideStyle
         value={props.settings.selectedRounds}

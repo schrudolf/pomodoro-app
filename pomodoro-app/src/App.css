@@ -1,5 +1,6 @@
 .app {
-    background-color: #22272E;
+    background-color: #2b3038;
+    border: none;
 }
 
 .circleProgress {
@@ -27,7 +28,6 @@
 
 .currentTime {
     color: #00db84 !important;
-    ;
 }
 
 .selectedTimers {
@@ -108,11 +108,16 @@
 }
 
 .settingsTitle {
-    margin: 1rem 0 2rem -2.5rem !important;
+    color: white;
+    margin: 1rem 0 2.5rem 0 !important;
+    text-align: center;
     font-weight: 600 !important;
+    text-decoration: underline;
 }
 
 .saveSettingsButton {
     width: 100%;
     font-weight: 600 !important;
+    background-color: #2CE69B!important;
+    color: #22272E !important;
 }
