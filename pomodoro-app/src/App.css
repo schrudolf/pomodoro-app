@@ -1,15 +1,12 @@
-html {
-    border: 1px solid rgb(143, 151, 140);
-    height: 768px;
+body {
+    margin: 0px;
+    padding: 0px;
     background-color: #2b3038;
     overflow: hidden;
 }
 
 /* own titlebar */
 .titlebar {
-    border-left: 1px solid rgb(143, 151, 140);
-    border-right: 1px solid rgb(143, 151, 140);
-    border-top: 1px solid rgb(143, 151, 140);
     background-color: #434c58;
     height: 4%;
     user-select: none;
@@ -37,8 +34,8 @@ html {
     display: flex;
     justify-content: flex-start;
     position: relative;
-    top: -9px;
-    left: -250px;
+    top: -25%;
+    left: -45%;
     right: 0;
     font-weight: 600;
 }

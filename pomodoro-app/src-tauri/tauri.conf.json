@@ -51,7 +51,7 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 770,
+        "height": 780,
         "resizable": false,
         "title": "MeTime",
         "width": 450,
