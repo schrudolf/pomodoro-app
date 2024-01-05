@@ -41,7 +41,7 @@ class Pomodoro {
       const selectedStateTime = await localforage.getItem(getSelectedStateTime);
       let getSelectedTime = parseInt(selectedStateTime as string);
       let getWorkTime = parseInt(timeValue);
-      let calculateCurrentPercent = Math.round(
+      let calculateCurrentPercent = Math.floor(
         100 - (getWorkTime / getSelectedTime) * 100
       );
       this.updateCurrentState(
