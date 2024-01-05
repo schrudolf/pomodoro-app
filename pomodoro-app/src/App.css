@@ -31,13 +31,12 @@ body {
 }
 .titlebarTitle{
     color: #fffcfca4;
-    display: flex;
-    justify-content: flex-start;
     position: relative;
     top: -25%;
-    left: -45%;
+    left: -55%;
     right: 0;
     font-weight: 600;
+    padding: 1px;
 }
 /* own titlebar end */
 
